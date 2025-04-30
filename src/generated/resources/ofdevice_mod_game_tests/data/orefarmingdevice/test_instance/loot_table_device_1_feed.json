@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "orefarmingdevice:loot_table_10",
+  "max_ticks": 810,
+  "structure": "forge:empty3x3x3"
+}

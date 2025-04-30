@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "orefarmingdevice:c_device_shallow",
+  "max_ticks": 224,
+  "structure": "forge:empty3x3x3"
+}
