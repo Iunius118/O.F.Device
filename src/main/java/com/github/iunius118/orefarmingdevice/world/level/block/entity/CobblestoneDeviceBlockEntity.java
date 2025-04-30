@@ -9,6 +9,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Containers;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -62,7 +63,7 @@ public class CobblestoneDeviceBlockEntity extends BaseContainerBlockEntity imple
         super.loadAdditional(compoundTag, provider);
         items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
         ContainerHelper.loadAllItems(compoundTag, items, provider);
-        intervalTime = compoundTag.getInt(KEY_INTERVAL_TIME);
+        intervalTime = compoundTag.getIntOr(KEY_INTERVAL_TIME, 0);
     }
 
     @Override
@@ -70,6 +71,13 @@ public class CobblestoneDeviceBlockEntity extends BaseContainerBlockEntity imple
         super.saveAdditional(compoundTag, provider);
         compoundTag.putInt(KEY_INTERVAL_TIME, intervalTime);
         ContainerHelper.saveAllItems(compoundTag, items, provider);
+    }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos blockPos, BlockState blockState) {
+        if (this.level != null) {
+            Containers.dropContents(this.level, blockPos, this);
+        }
     }
 
     /* ITickableTileEntity */

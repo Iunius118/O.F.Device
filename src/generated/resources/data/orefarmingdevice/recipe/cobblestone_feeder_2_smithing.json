@@ -3,7 +3,6 @@
   "addition": "minecraft:diamond_pickaxe",
   "base": "orefarmingdevice:cobblestone_feeder",
   "result": {
-    "count": 1,
     "id": "orefarmingdevice:cobblestone_feeder_2"
   },
   "template": "minecraft:paper"
