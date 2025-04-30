@@ -19,8 +19,7 @@ public final class ModDataGenerator {
 
         // Client
         boolean includesClient = event.includeClient();
-        dataGenerator.addProvider(includesClient, new ModBlockStateProvider(packOutput, existingFileHelper));
-        dataGenerator.addProvider(includesClient, new ModItemModelProvider(packOutput, existingFileHelper));
+        dataGenerator.addProvider(includesClient, new ModModelProvider(packOutput));
         ModLanguageProvider.addProviders(includesClient, dataGenerator);
     }
 }
