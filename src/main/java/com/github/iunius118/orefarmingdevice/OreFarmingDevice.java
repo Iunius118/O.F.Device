@@ -4,6 +4,7 @@ import com.github.iunius118.orefarmingdevice.client.ClientModEventHandler;
 import com.github.iunius118.orefarmingdevice.common.RegisterEventHandler;
 import com.github.iunius118.orefarmingdevice.config.OreFarmingDeviceConfig;
 import com.github.iunius118.orefarmingdevice.data.ModDataGenerator;
+import com.github.iunius118.orefarmingdevice.gametest.ModGameTest;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -32,6 +33,9 @@ public class OreFarmingDevice {
         // Register optional data pack handlers
         modEventBus.addListener(Experimental1202DataProvider::addPackFinders);
          */
+
+        // Register game test handlers
+        ModGameTest.register(modEventBus);
 
         // Register client-side mod event handler
         if (FMLLoader.getDist().isClient()) {
