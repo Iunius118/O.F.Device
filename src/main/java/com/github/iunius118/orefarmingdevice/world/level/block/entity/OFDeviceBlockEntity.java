@@ -14,6 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -113,7 +114,7 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
     @Override
     public void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
         super.loadAdditional(compoundTag, provider);
-        farmingEfficiency = Mth.clamp(compoundTag.getFloat(KEY_EFFICIENCY), 0F, MAX_EFFICIENCY);
+        farmingEfficiency = Mth.clamp(compoundTag.getFloatOr(KEY_EFFICIENCY, 0F), 0F, MAX_EFFICIENCY);
     }
 
     @Override
@@ -299,6 +300,13 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
             cookingTotalTime = getTotalProcessingTime();
             cookingTimer = 0;
             setChanged();
+        }
+    }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos blockPos, BlockState blockState) {
+        if (this.level != null) {
+            Containers.dropContents(this.level, blockPos, this);
         }
     }
 

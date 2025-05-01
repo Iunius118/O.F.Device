@@ -111,20 +111,8 @@ public class OFDeviceBlock extends AbstractFurnaceBlock {
     }
 
     @Override
-    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean p_196243_5_) {
-        if (!state.is(oldState.getBlock())) {
-            var blockEntity = level.getBlockEntity(pos);
-
-            if (blockEntity instanceof OFDeviceBlockEntity deviceBlockEntity) {
-                if (level instanceof ServerLevel) {
-                    Containers.dropContents(level, pos, deviceBlockEntity);
-                }
-
-                level.updateNeighbourForOutputSignal(pos, this);
-            }
-
-            super.onRemove(state, level, pos, oldState, p_196243_5_);
-        }
+    protected void affectNeighborsAfterRemoval(BlockState blockState, ServerLevel serverLevel, BlockPos pos, boolean movedByPiston) {
+        Containers.updateNeighboursAfterDestroy(blockState, serverLevel, pos);
     }
 
     @Override

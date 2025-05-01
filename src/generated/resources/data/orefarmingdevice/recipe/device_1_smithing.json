@@ -3,7 +3,6 @@
   "addition": "minecraft:iron_pickaxe",
   "base": "orefarmingdevice:device_0",
   "result": {
-    "count": 1,
     "id": "orefarmingdevice:device_1"
   },
   "template": "minecraft:paper"
