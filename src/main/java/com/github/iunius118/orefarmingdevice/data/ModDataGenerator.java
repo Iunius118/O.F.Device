@@ -1,6 +1,13 @@
 package com.github.iunius118.orefarmingdevice.data;
 
+import net.minecraft.DetectedVersion;
+import net.minecraft.data.metadata.PackMetadataGenerator;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.minecraftforge.data.event.GatherDataEvent;
+
+import java.util.Optional;
 
 public final class ModDataGenerator {
     public static void gatherData(GatherDataEvent event) {
@@ -19,6 +26,9 @@ public final class ModDataGenerator {
 
         // Client
         boolean includesClient = event.includeClient();
+        dataGenerator.addProvider(includesClient, new PackMetadataGenerator(packOutput).add(PackMetadataSection.TYPE,
+                new PackMetadataSection(Component.literal("${mod_id} resources"),
+                        DetectedVersion.BUILT_IN.packVersion(PackType.CLIENT_RESOURCES), Optional.empty())));
         dataGenerator.addProvider(includesClient, new ModModelProvider(packOutput));
         ModLanguageProvider.addProviders(includesClient, dataGenerator);
     }
