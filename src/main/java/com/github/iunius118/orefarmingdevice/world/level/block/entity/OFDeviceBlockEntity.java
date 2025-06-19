@@ -8,8 +8,6 @@ import com.github.iunius118.orefarmingdevice.world.item.CobblestoneFeederItem;
 import com.github.iunius118.orefarmingdevice.world.item.CobblestoneFeederType;
 import com.github.iunius118.orefarmingdevice.world.item.crafting.ModRecipeTypes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
@@ -26,6 +24,8 @@ import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.phys.AABB;
@@ -112,15 +112,15 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
     }
 
     @Override
-    public void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
-        super.loadAdditional(compoundTag, provider);
-        farmingEfficiency = Mth.clamp(compoundTag.getFloatOr(KEY_EFFICIENCY, 0F), 0F, MAX_EFFICIENCY);
+    public void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        farmingEfficiency = Mth.clamp(input.getFloatOr(KEY_EFFICIENCY, 0F), 0F, MAX_EFFICIENCY);
     }
 
     @Override
-    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
-        super.saveAdditional(compoundTag, provider);
-        compoundTag.putFloat(KEY_EFFICIENCY, Mth.clamp(farmingEfficiency, 0F, MAX_EFFICIENCY));
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        output.putFloat(KEY_EFFICIENCY, Mth.clamp(farmingEfficiency, 0F, MAX_EFFICIENCY));
     }
 
     public static void serverTick(ServerLevel level, BlockPos blockPos, BlockState blockState, OFDeviceBlockEntity device) {
