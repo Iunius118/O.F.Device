@@ -4,6 +4,11 @@
 
 ## [Unreleased]
 
+## [10.0.0 Forge]
+### Changed
+- Port to 1.21.6.
+- Require Forge 1.21.6-56.0.2+.
+
 ## [9.0.0 Forge]
 ### Changed
 - Port to 1.21.5.
