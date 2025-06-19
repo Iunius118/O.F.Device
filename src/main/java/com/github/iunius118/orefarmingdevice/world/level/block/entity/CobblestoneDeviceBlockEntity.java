@@ -3,9 +3,7 @@ package com.github.iunius118.orefarmingdevice.world.level.block.entity;
 import com.github.iunius118.orefarmingdevice.inventory.CobblestoneDeviceMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.ContainerHelper;
@@ -24,6 +22,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 import javax.annotation.Nullable;
 
@@ -59,18 +59,18 @@ public class CobblestoneDeviceBlockEntity extends BaseContainerBlockEntity imple
     }
 
     @Override
-    public void loadAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
-        super.loadAdditional(compoundTag, provider);
+    public void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
         items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(compoundTag, items, provider);
-        intervalTime = compoundTag.getIntOr(KEY_INTERVAL_TIME, 0);
+        ContainerHelper.loadAllItems(input, items);
+        intervalTime = input.getIntOr(KEY_INTERVAL_TIME, 0);
     }
 
     @Override
-    protected void saveAdditional(CompoundTag compoundTag, HolderLookup.Provider provider) {
-        super.saveAdditional(compoundTag, provider);
-        compoundTag.putInt(KEY_INTERVAL_TIME, intervalTime);
-        ContainerHelper.saveAllItems(compoundTag, items, provider);
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        output.putInt(KEY_INTERVAL_TIME, intervalTime);
+        ContainerHelper.saveAllItems(output, items);
     }
 
     @Override

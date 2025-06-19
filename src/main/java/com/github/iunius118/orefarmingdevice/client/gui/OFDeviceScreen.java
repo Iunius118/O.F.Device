@@ -4,7 +4,7 @@ import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
 import com.github.iunius118.orefarmingdevice.inventory.OFDeviceMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -36,16 +36,16 @@ public class OFDeviceScreen extends AbstractContainerScreen<OFDeviceMenu> {
     protected void renderBg(GuiGraphics guiGraphics, float renderTicks, int mouseX, int mouseY) {
         int left = this.leftPos;
         int top = this.topPos;
-        guiGraphics.blit(RenderType::guiTextured, TEXTURE, left, top, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, left, top, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);
 
         if (this.menu.isLit()) {
             // Render remaining burn time bar
             int litProgress = Mth.ceil(this.menu.getLitProgress() * 30.0F);
-            guiGraphics.blitSprite(RenderType::guiTextured, LIT_PROGRESS_SPRITE, 8, 30, 0, 30 - litProgress, left + 78, top + 28 + 30 - litProgress, 8, litProgress);
+            guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, LIT_PROGRESS_SPRITE, 8, 30, 0, 30 - litProgress, left + 78, top + 28 + 30 - litProgress, 8, litProgress);
         }
 
         // Render smelting progress bar
         int burnProgress = Mth.ceil(this.menu.getBurnProgress() * 16.0F);
-        guiGraphics.blitSprite(RenderType::guiTextured, BURN_PROGRESS_SPRITE, 14, 16, 0, 0, left + 108, top + 35, 16, burnProgress);
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BURN_PROGRESS_SPRITE, 14, 16, 0, 0, left + 108, top + 35, 16, burnProgress);
     }
 }
