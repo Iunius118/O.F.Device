@@ -7,9 +7,10 @@ import com.github.iunius118.orefarmingdevice.data.ModDataGenerator;
 import com.github.iunius118.orefarmingdevice.gametest.ModGameTest;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
@@ -21,26 +22,26 @@ public class OreFarmingDevice {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public OreFarmingDevice(FMLJavaModLoadingContext context) {
-        final IEventBus modEventBus = context.getModEventBus();
+        final var modBusGroup = context.getModBusGroup();
         // Register mod lifecycle event handlers
 
         // Register config handlers
         context.registerConfig(ModConfig.Type.SERVER, OreFarmingDeviceConfig.SERVER_SPEC);
 
         // Register event handlers
-        RegisterEventHandler.registerGameObjects(modEventBus);
-        modEventBus.addListener(ModDataGenerator::gatherData);
+        RegisterEventHandler.registerGameObjects(modBusGroup);
+        GatherDataEvent.getBus(modBusGroup).addListener(ModDataGenerator::gatherData);
         /* Disable data pack Experimental_1202 since 1.20.2
         // Register optional data pack handlers
-        modEventBus.addListener(Experimental1202DataProvider::addPackFinders);
-         */
+        AddPackFindersEvent.getBus(modBusGroup).addListener(Experimental1202DataProvider::addPackFinders);
+        //*/
 
         // Register game test handlers
-        ModGameTest.register(modEventBus);
+        ModGameTest.register(modBusGroup);
 
         // Register client-side mod event handler
         if (FMLEnvironment.dist.isClient()) {
-            modEventBus.addListener(ClientModEventHandler::setup);
+            FMLClientSetupEvent.getBus(modBusGroup).addListener(ClientModEventHandler::setup);
         }
     }
 

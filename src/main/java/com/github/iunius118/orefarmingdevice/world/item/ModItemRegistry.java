@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.bus.BusGroup;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -42,8 +42,8 @@ public class ModItemRegistry {
         return ITEMS.register(name, () -> func.apply(properties.setId(modItemId(name))));
     }
 
-    public static void register(IEventBus modEventBus) {
+    public static void register(BusGroup modBusGroup) {
         OreFarmingDevice.LOGGER.debug("Register mod items");
-        ITEMS.register(modEventBus);
+        ITEMS.register(modBusGroup);
     }
 }

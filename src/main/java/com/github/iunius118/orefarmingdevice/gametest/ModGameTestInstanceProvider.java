@@ -17,7 +17,7 @@ import net.minecraft.server.packs.repository.PackSource;
 import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddPackFindersEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.bus.BusGroup;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegisterData;
 
@@ -27,9 +27,9 @@ public class ModGameTestInstanceProvider {
     private final static String PACK_PATH = "ofdevice_mod_game_tests";
     private final static ResourceLocation PACK_ID = OreFarmingDevice.makeId(PACK_PATH);
 
-    public static void addListeners(final IEventBus modEventBus) {
-        modEventBus.addListener(ModGameTestInstanceProvider::addProviders);
-        modEventBus.addListener(ModGameTestInstanceProvider::addPackFinders);
+    public static void addListeners(final BusGroup modBusGroup) {
+        GatherDataEvent.getBus(modBusGroup).addListener(ModGameTestInstanceProvider::addProviders);
+        AddPackFindersEvent.getBus(modBusGroup).addListener(ModGameTestInstanceProvider::addPackFinders);
     }
 
     private static void addProviders(final GatherDataEvent event) {

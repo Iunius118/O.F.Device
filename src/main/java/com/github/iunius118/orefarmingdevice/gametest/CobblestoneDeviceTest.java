@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.bus.BusGroup;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.DeferredRegisterData;
 
@@ -27,7 +27,7 @@ public class CobblestoneDeviceTest {
     private static final List<ResourceKey<Consumer<GameTestHelper>>> TEST_FUNCTIONS = new ArrayList<>();
     private static final int COBBLESTONE_DEVICE_TEST_MAX_TICKS = 224;
 
-    public static void register(IEventBus modEventBus) {
+    public static void register(BusGroup modBusGroup) {
         // Register test functions
         var testFunctionRegister = DeferredRegister.create(Registries.TEST_FUNCTION, OreFarmingDevice.MOD_ID);
         TEST_FUNCTIONS.clear();
@@ -35,7 +35,7 @@ public class CobblestoneDeviceTest {
         TEST_FUNCTIONS.add(testFunctionRegister.register("c_device_shallow", () -> getCobblestoneDeviceTest(true)).getKey());
         TEST_FUNCTIONS.add(testFunctionRegister.register("c_device_deep", () -> getCobblestoneDeviceTest(false)).getKey());
 
-        testFunctionRegister.register(modEventBus);
+        testFunctionRegister.register(modBusGroup);
     }
 
     private static Consumer<GameTestHelper> getCobblestoneDeviceTest(boolean isInShallowLayer) {

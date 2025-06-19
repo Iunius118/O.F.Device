@@ -15,7 +15,7 @@ import net.minecraft.gametest.framework.*;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.bus.BusGroup;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.DeferredRegisterData;
 
@@ -28,7 +28,7 @@ public class OFDeviceLootTableTest {
     private static final List<ResourceKey<Consumer<GameTestHelper>>> TEST_FUNCTIONS = new ArrayList<>();
     public static final int LOOT_TABLE_LOOKUP_TEST_MAX_TICKS = 810;
 
-    public static void register(IEventBus modEventBus) {
+    public static void register(BusGroup modBusGroup) {
         // Register test functions
         var testFunctionRegister = DeferredRegister.create(Registries.TEST_FUNCTION, OreFarmingDevice.MOD_ID);
         TEST_FUNCTIONS.clear();
@@ -38,7 +38,7 @@ public class OFDeviceLootTableTest {
             TEST_FUNCTIONS.add(testFunctionRegister.register(name, () -> getLootTableLookupTest(i)).getKey());
         });
 
-        testFunctionRegister.register(modEventBus);
+        testFunctionRegister.register(modBusGroup);
     }
 
     private static Consumer<GameTestHelper> getLootTableLookupTest(int index) {
