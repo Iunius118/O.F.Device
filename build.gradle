@@ -2,7 +2,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0.24,6.2)'
+    id 'net.minecraftforge.gradle' version '[6.0.36,6.2)'
 }
 
 version = minecraft_version + '-' + mod_version
@@ -35,6 +35,11 @@ minecraft {
 
             // property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+
+            // Recommended for development - enables more descriptive errors at the cost of slower startup and registration.
+            property 'eventbus.api.strictRuntimeChecks', 'true'
+
+            //arg "-mixin.config=${mod_id}.mixins.json"
         }
 
         client {
@@ -49,6 +54,7 @@ minecraft {
         // This run config launches GameTestServer and runs all registered gametests, then exits.
         gameTestServer {
             property 'forge.enabledGameTestNamespaces', mod_id
+            args '--nogui'
         }
 
         data {
@@ -64,6 +70,28 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    // Put repositories for dependencies here
+    mavenCentral()
+    maven {
+        name = 'Forge'
+        url = 'https://maven.minecraftforge.net'
+    }
+    maven {
+        name = 'Minecraft libraries'
+        url = 'https://libraries.minecraft.net'
+    }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'Sponge'
+                url = 'https://repo.spongepowered.org/repository/maven-public'
+            }
+        }
+        filter {
+            includeGroupAndSubgroups('org.spongepowered')
+        }
+    }
+
     // flatDir {
     //     dir 'libs'
     // }
@@ -72,8 +100,8 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    // Hack fix for now, force jopt-simple to be exactly 5.0.4 because Mojang ships that version, but some transitive dependencies request 6.0+
-    implementation('net.sf.jopt-simple:jopt-simple:5.0.4') { version { strictly '5.0.4' } }
+    // Forge 1.21.6+ uses EventBus 7
+    annotationProcessor 'net.minecraftforge:eventbus-validator:7.0-beta.8'
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -103,6 +131,8 @@ tasks.named('jar', Jar).configure {
                 'Implementation-Version'  : project.jar.archiveVersion,
                 'Implementation-Vendor'   : mod_authors
         ])
+
+        //attributes['MixinConfigs'] = "${mod_id}.mixins.json"
     }
 
     from("LICENSE.txt", "CHANGELOG.txt", "CHEATSHEET.txt", "CREDITS.txt")
