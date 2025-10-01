@@ -13,6 +13,8 @@ O.F.Device is a Minecraft mod to add devices for farming ores.
 
 - Minecraft Forge or NeoForge
 
+Since Minecraft 1.21, NeoForge has been the primary target.
+
 ## Description
 
 Version 4.1.0 (Minecraft 1.20.2) or later.
