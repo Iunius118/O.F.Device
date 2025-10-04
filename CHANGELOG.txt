@@ -3,7 +3,10 @@
 [Source](https://github.com/Iunius118/O.F.Device).
 
 ## [Unreleased]
+
+## [11.0.0 NeoForge]
 ### Changed
+- Port to 1.21.9.
 - Require NeoForge 21.9.11-beta+.
 
 ## [10.0.0 NeoForge]
