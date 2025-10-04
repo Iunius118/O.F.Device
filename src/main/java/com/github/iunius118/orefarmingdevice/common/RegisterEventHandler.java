@@ -14,9 +14,9 @@ import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.items.wrapper.InvWrapper;
-import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.transfer.item.VanillaContainerWrapper;
+import net.neoforged.neoforge.transfer.item.WorldlyContainerWrapper;
 
 import java.util.List;
 
@@ -86,11 +86,17 @@ public class RegisterEventHandler {
 
     private static void registerCapabilities(RegisterCapabilitiesEvent event) {
         // Add item handler capabilities to mod containers
-        var sidedModContainers = List.of(ModBlockEntityTypes.COBBLESTONE_DEVICE_0);
+        var modContainers = List.of(ModBlockEntityTypes.COBBLESTONE_DEVICE_0);
 
-        for (var type : sidedModContainers) {
-            event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, type,
-                    (sidedContainer, side) -> side == null ? new InvWrapper(sidedContainer) : new SidedInvWrapper(sidedContainer, side));
+        for (var type : modContainers) {
+            event.registerBlockEntity(Capabilities.Item.BLOCK, type,
+                    (container, side) -> {
+                        if (side == null) {
+                            return VanillaContainerWrapper.of(container);
+                        } else {
+                            return new WorldlyContainerWrapper(container, side);
+                        }
+                    });
         }
     }
 }

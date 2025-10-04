@@ -64,7 +64,7 @@ public class CobblestoneDeviceBlock extends BaseEntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (level.isClientSide) {
+        if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         }
 
@@ -75,7 +75,7 @@ public class CobblestoneDeviceBlock extends BaseEntityBlock {
 
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (level.isClientSide) {
+        if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         }
 
@@ -93,7 +93,7 @@ public class CobblestoneDeviceBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
-        return level.isClientSide ? null : createTickerHelper(blockEntityType, CobblestoneDeviceBlockEntity.getBlockEntityType(type), CobblestoneDeviceBlockEntity::serverTick);
+        return level.isClientSide() ? null : createTickerHelper(blockEntityType, CobblestoneDeviceBlockEntity.getBlockEntityType(type), CobblestoneDeviceBlockEntity::serverTick);
     }
 
     protected void openContainer(Level level, BlockPos pos, Player player) {

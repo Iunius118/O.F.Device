@@ -13,11 +13,7 @@ import net.minecraft.data.metadata.PackMetadataGenerator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackLocationInfo;
-import net.minecraft.server.packs.PackSelectionConfig;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.PathPackResources;
-import net.minecraft.server.packs.repository.KnownPack;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.util.ProblemReporter;
@@ -29,12 +25,10 @@ import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
@@ -57,19 +51,7 @@ public class Experimental1202DataProvider {
     }
 
     public static void addPackFinders(final AddPackFindersEvent event) {
-        if (event.getPackType() != PackType.SERVER_DATA) {
-            return;
-        }
-
-        var knownPack = new KnownPack(OreFarmingDevice.MOD_ID, PACK_PATH, "1.0");
-        var packInfo = new PackLocationInfo(PACK_ID.toString(), Component.literal(PACK_PATH), PackSource.FEATURE, Optional.of(knownPack));
-        var resourcePath = ModList.get().getModFileById(OreFarmingDevice.MOD_ID).getFile().findResource(PACK_PATH);
-        var packConfig = new PackSelectionConfig(false, Pack.Position.TOP, false);
-        var pack = Pack.readMetaAndCreate(packInfo, new PathPackResources.PathResourcesSupplier(resourcePath), PackType.SERVER_DATA, packConfig);
-
-        if (pack != null) {
-            event.addRepositorySource((packConsumer) -> packConsumer.accept(pack));
-        }
+        event.addPackFinders(PACK_ID, PackType.SERVER_DATA, Component.literal(PACK_PATH), PackSource.FEATURE, false, Pack.Position.TOP);
     }
 
     private static class ExperimentalLootTableProvider extends LootTableProvider {

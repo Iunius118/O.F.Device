@@ -11,7 +11,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.fml.loading.FMLEnvironment;
 import org.slf4j.Logger;
 
 @Mod(OreFarmingDevice.MOD_ID)
@@ -32,13 +32,13 @@ public class OreFarmingDevice {
         /* Disable data pack Experimental_1202 since 1.20.2
         // Register optional data pack handlers
         modEventBus.addListener(Experimental1202DataProvider::addPackFinders);
-         */
+        //*/
 
         // Register game test handlers
         ModGameTest.register(modEventBus);
 
         // Register client-side mod event handler
-        if (FMLLoader.getDist().isClient()) {
+        if (FMLEnvironment.getDist().isClient()) {
             modEventBus.register(ClientModEventHandler.class);
         }
     }

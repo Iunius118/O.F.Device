@@ -87,7 +87,7 @@ public class CobblestoneDeviceBlockEntity extends BaseContainerBlockEntity imple
         if (++device.intervalTime >= device.getIntervalTicks()) {
             device.intervalTime = 0;
 
-            if (level == null || level.isClientSide) {
+            if (level == null || level.isClientSide()) {
                 return;
             }
 
