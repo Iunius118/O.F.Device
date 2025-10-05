@@ -15,7 +15,7 @@ O.F.Device is a Minecraft mod to add devices for farming ores.
 
 ## Description
 
-Version 10.0.0
+Version 11.0.0
 
 ### OF Device (ＯＦ装置)
 

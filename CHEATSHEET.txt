@@ -1,6 +1,6 @@
 # Cheatsheet
 [O.F.Device (Ore Farming Device)](https://github.com/Iunius118/O.F.Device)
-Version 10.0.0
+Version 11.0.0
 
 ## Blocks
 
