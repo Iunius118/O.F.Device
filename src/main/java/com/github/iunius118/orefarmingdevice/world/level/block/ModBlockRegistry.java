@@ -3,6 +3,7 @@ package com.github.iunius118.orefarmingdevice.world.level.block;
 import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
 import com.github.iunius118.orefarmingdevice.world.level.block.entity.CobblestoneDeviceType;
 import com.github.iunius118.orefarmingdevice.world.level.block.entity.OFDeviceType;
+import com.google.common.base.Supplier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -22,7 +23,10 @@ public class ModBlockRegistry {
     public static final DeferredBlock<Block> COBBLESTONE_DEVICE_0 = registerDeviceBlock(CobblestoneDeviceType.BASIC.getName(), p -> new CobblestoneDeviceBlock(p, CobblestoneDeviceType.BASIC));
 
     private static DeferredBlock<Block> registerDeviceBlock(String name, Function<BlockBehaviour.Properties, Block> func) {
-        var properties = BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(3.5F);
+        Supplier<BlockBehaviour.Properties> properties = () -> BlockBehaviour.Properties.of()
+                .mapColor(MapColor.STONE)
+                .instrument(NoteBlockInstrument.BASEDRUM)
+                .requiresCorrectToolForDrops().strength(3.5F);
         return BLOCKS.registerBlock(name, func, properties);
     }
 

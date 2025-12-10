@@ -7,8 +7,8 @@ import com.github.iunius118.orefarmingdevice.world.item.ModItems;
 import com.github.iunius118.orefarmingdevice.world.level.block.entity.OFDeviceBlockEntity;
 import com.github.iunius118.orefarmingdevice.world.level.block.entity.OFDeviceType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
@@ -44,7 +44,7 @@ public enum ModLootTables {
     DEVICE_2_FEED_2_DEEP("device_2_d", ModItems.COBBLESTONE_FEEDER_2, OFDeviceLootCondition.is(OFDeviceLootCondition.MOD_2_IN_DEEP_LAYER)),
     ;
 
-    private final ResourceLocation id;
+    private final Identifier id;
     private final ResourceKey<LootTable> resourceKey;
     private final ItemStack material;
     private final Predicate<OFDeviceLootCondition> canProcess;
@@ -64,7 +64,7 @@ public enum ModLootTables {
         return Arrays.stream(values()).filter(t -> t.canProcess(lootCondition, stack)).findFirst();
     }
 
-    public ResourceLocation getId() {
+    public Identifier getId() {
         return id;
     }
 

@@ -7,7 +7,7 @@ import com.github.iunius118.orefarmingdevice.world.level.block.entity.OFDeviceTy
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -34,7 +34,7 @@ public class OFDeviceBlock extends AbstractFurnaceBlock {
     public static final MapCodec<OFDeviceBlock> CODEC = RecordCodecBuilder.mapCodec(
             (instance) -> instance.group(
                     BlockBehaviour.Properties.CODEC.fieldOf("properties").forGetter(BlockBehaviour::properties),
-                    ResourceLocation.CODEC.fieldOf("device_type").forGetter(d -> d.type.getId())
+                    Identifier.CODEC.fieldOf("device_type").forGetter(d -> d.type.getId())
             ).apply(instance, OFDeviceBlock::new)
     );
     public static final EnumProperty<OFDeviceCasing> CASING = ModBlockStateProperties.CASING;
@@ -47,7 +47,7 @@ public class OFDeviceBlock extends AbstractFurnaceBlock {
         type = ofDeviceType;
     }
 
-    public OFDeviceBlock(Properties properties, ResourceLocation deviceType) {
+    public OFDeviceBlock(Properties properties, Identifier deviceType) {
         this(properties, OFDeviceType.valueOf(deviceType));
     }
 

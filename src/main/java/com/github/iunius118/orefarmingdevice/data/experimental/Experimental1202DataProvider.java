@@ -11,8 +11,8 @@ import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.data.loot.packs.VanillaLootTableProvider;
 import net.minecraft.data.metadata.PackMetadataGenerator;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
@@ -35,7 +35,7 @@ import java.util.function.BiConsumer;
 
 public class Experimental1202DataProvider {
     private final static String PACK_PATH = "experimental_1202";
-    private final static ResourceLocation PACK_ID = OreFarmingDevice.makeId(PACK_PATH);
+    private final static Identifier PACK_ID = OreFarmingDevice.makeId(PACK_PATH);
     private final static String PACK_NAME = "O.F.Device Experimental 1202";
 
     private Experimental1202DataProvider() {}

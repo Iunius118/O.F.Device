@@ -1,7 +1,7 @@
 package com.github.iunius118.orefarmingdevice.world.item;
 
 import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public enum CobblestoneFeederType {
     BASIC("cobblestone_feeder"),
@@ -18,7 +18,7 @@ public enum CobblestoneFeederType {
         return name;
     }
 
-    public ResourceLocation getId() {
+    public Identifier getId() {
         return OreFarmingDevice.makeId(name);
     }
 }

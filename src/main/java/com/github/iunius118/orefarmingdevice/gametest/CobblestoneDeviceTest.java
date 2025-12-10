@@ -148,7 +148,7 @@ public class CobblestoneDeviceTest {
     public static void registerTestInstance(RegisterGameTestsEvent event, Holder<TestEnvironmentDefinition> testEnvironment) {
         // Register cobblestone device test instances
         TEST_FUNCTIONS.forEach(key ->
-                event.registerTest(key.location(),
+                event.registerTest(key.identifier(),
                         new FunctionGameTestInstance(key,
                                 new TestData<>(testEnvironment, ModGameTest.DEFAULT_STRUCTURE, COBBLESTONE_DEVICE_TEST_MAX_TICKS, 0, true))));
     }

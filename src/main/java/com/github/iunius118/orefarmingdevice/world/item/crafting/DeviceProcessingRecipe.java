@@ -31,14 +31,17 @@ public class DeviceProcessingRecipe extends AbstractCookingRecipe {
     public RecipeType<? extends AbstractCookingRecipe> getType() {
         return ModRecipeTypes.DEVICE_PROCESSING;
     }
+
     @Override
     public RecipeBookCategory recipeBookCategory() {
-        return null;
+        return ModRecipeBookCategories.DEVICE;
     }
+
     @Override
     protected Item furnaceIcon() {
         return ModItems.DEVICE_0;
     }
+
     @Override
     public RecipeSerializer<DeviceProcessingRecipe> getSerializer() {
         return ModRecipeSerializers.DEVICE_PROCESSING;
