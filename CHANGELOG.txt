@@ -3,6 +3,9 @@
 [Source](https://github.com/Iunius118/O.F.Device).
 
 ## [Unreleased]
+### Changed
+- Port to 1.21.11.
+- Require Forge 1.21.11-61.0.2+.
 
 ## [11.0.0 Forge]
 ### Changed
