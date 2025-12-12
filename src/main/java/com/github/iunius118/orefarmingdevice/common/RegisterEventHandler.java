@@ -28,6 +28,7 @@ public class RegisterEventHandler {
         registerBlockEntityTypes(modEventBus);
         registerRecipeTypes(modEventBus);
         registerRecipeSerializers(modEventBus);
+        registerRecipeBookCategories(modEventBus);
         registerMenuTypes(modEventBus);
         registerCreativeModeTabs(modEventBus);
         modEventBus.addListener(RegisterEventHandler::registerCapabilities);

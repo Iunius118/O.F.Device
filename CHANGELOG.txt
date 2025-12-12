@@ -3,6 +3,8 @@
 [Source](https://github.com/Iunius118/O.F.Device).
 
 ## [Unreleased]
+### Fixed
+- Register mod recipe book category.
 
 ## [12.0.0 NeoForge]
 ### Changed
