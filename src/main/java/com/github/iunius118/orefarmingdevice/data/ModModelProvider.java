@@ -33,7 +33,7 @@ public class ModModelProvider extends ModelProvider {
     protected Stream<Block> getKnownBlocks() {
         // Return stream of all mod blocks
         return ForgeRegistries.BLOCKS.getEntries().stream()
-                .filter(e -> e.getKey().location().getNamespace().equals(OreFarmingDevice.MOD_ID))
+                .filter(e -> e.getKey().identifier().getNamespace().equals(OreFarmingDevice.MOD_ID))
                 .map(Map.Entry::getValue);
     }
 
@@ -41,7 +41,7 @@ public class ModModelProvider extends ModelProvider {
     protected Stream<Item> getKnownItems() {
         // Return stream of all mod items
         return ForgeRegistries.ITEMS.getEntries().stream()
-                .filter(e -> e.getKey().location().getNamespace().equals(OreFarmingDevice.MOD_ID))
+                .filter(e -> e.getKey().identifier().getNamespace().equals(OreFarmingDevice.MOD_ID))
                 .map(Map.Entry::getValue);
     }
 

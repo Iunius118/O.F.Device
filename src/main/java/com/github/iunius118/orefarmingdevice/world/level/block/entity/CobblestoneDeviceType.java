@@ -1,7 +1,7 @@
 package com.github.iunius118.orefarmingdevice.world.level.block.entity;
 
 import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.Arrays;
 
@@ -17,7 +17,7 @@ public enum CobblestoneDeviceType {
         this.intervalTicks = intervalTicks;
     }
 
-    public static CobblestoneDeviceType valueOf (ResourceLocation id) {
+    public static CobblestoneDeviceType valueOf (Identifier id) {
         return Arrays.stream(CobblestoneDeviceType.values()).filter(t -> t.getId().equals(id)).findFirst().orElse(BASIC);
     }
 
@@ -33,7 +33,7 @@ public enum CobblestoneDeviceType {
         return "container." + OreFarmingDevice.MOD_ID + "." + name;
     }
 
-    public ResourceLocation getId() {
+    public Identifier getId() {
         return OreFarmingDevice.makeId(name);
     }
 }

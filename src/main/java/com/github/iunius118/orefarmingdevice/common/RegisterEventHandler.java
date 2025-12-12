@@ -4,6 +4,7 @@ import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
 import com.github.iunius118.orefarmingdevice.inventory.ModMenuTypes;
 import com.github.iunius118.orefarmingdevice.world.item.ModCreativeModeTabs;
 import com.github.iunius118.orefarmingdevice.world.item.ModItemRegistry;
+import com.github.iunius118.orefarmingdevice.world.item.crafting.ModRecipeBookCategories;
 import com.github.iunius118.orefarmingdevice.world.item.crafting.ModRecipeSerializers;
 import com.github.iunius118.orefarmingdevice.world.item.crafting.ModRecipeTypes;
 import com.github.iunius118.orefarmingdevice.world.level.block.ModBlockRegistry;
@@ -22,6 +23,7 @@ public class RegisterEventHandler {
         registerBlockEntityTypes(modBusGroup);
         registerRecipeTypes(modBusGroup);
         registerRecipeSerializers(modBusGroup);
+        registerRecipeBookCategories(modBusGroup);
         registerMenuTypes(modBusGroup);
         registerCreativeModeTabs(modBusGroup);
     }
@@ -57,6 +59,14 @@ public class RegisterEventHandler {
         var recipeSerializerRegister = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, OreFarmingDevice.MOD_ID);
 
         recipeSerializerRegister.register("device_processing", () -> ModRecipeSerializers.DEVICE_PROCESSING);
+
+        recipeSerializerRegister.register(modBusGroup);
+    }
+
+    private static void registerRecipeBookCategories(BusGroup modBusGroup) {
+        var recipeSerializerRegister = DeferredRegister.create(Registries.RECIPE_BOOK_CATEGORY, OreFarmingDevice.MOD_ID);
+
+        recipeSerializerRegister.register("device", () -> ModRecipeBookCategories.DEVICE);
 
         recipeSerializerRegister.register(modBusGroup);
     }

@@ -34,7 +34,7 @@ public class DeviceProcessingRecipe extends AbstractCookingRecipe {
 
     @Override
     public RecipeBookCategory recipeBookCategory() {
-        return null;
+        return ModRecipeBookCategories.DEVICE;
     }
 
     @Override

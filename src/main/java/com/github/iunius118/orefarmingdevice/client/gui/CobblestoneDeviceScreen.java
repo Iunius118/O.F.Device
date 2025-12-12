@@ -6,11 +6,11 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 
 public class CobblestoneDeviceScreen extends AbstractContainerScreen<CobblestoneDeviceMenu> {
-    private static final ResourceLocation TEXTURE = OreFarmingDevice.makeId("textures/gui/container/c_feeder.png");
+    private static final Identifier TEXTURE = OreFarmingDevice.makeId("textures/gui/container/c_feeder.png");
 
     public CobblestoneDeviceScreen(CobblestoneDeviceMenu menu, Inventory playerInventory, Component textComponent) {
         super(menu, playerInventory, textComponent);

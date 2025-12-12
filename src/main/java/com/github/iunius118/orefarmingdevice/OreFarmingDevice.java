@@ -6,7 +6,7 @@ import com.github.iunius118.orefarmingdevice.config.OreFarmingDeviceConfig;
 import com.github.iunius118.orefarmingdevice.data.ModDataGenerator;
 import com.github.iunius118.orefarmingdevice.gametest.ModGameTest;
 import com.mojang.logging.LogUtils;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -45,7 +45,7 @@ public class OreFarmingDevice {
         }
     }
 
-    public static ResourceLocation makeId(String name) {
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
+    public static Identifier makeId(String name) {
+        return Identifier.fromNamespaceAndPath(MOD_ID, name);
     }
 }

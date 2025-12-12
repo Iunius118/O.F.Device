@@ -6,14 +6,14 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 
 public class OFDeviceScreen extends AbstractContainerScreen<OFDeviceMenu> {
-    private static final ResourceLocation LIT_PROGRESS_SPRITE = OreFarmingDevice.makeId("container/of_device/lit_progress");
-    private static final ResourceLocation BURN_PROGRESS_SPRITE = OreFarmingDevice.makeId("container/of_device/burn_progress");
-    private static final ResourceLocation TEXTURE = OreFarmingDevice.makeId("textures/gui/container/of_device.png");
+    private static final Identifier LIT_PROGRESS_SPRITE = OreFarmingDevice.makeId("container/of_device/lit_progress");
+    private static final Identifier BURN_PROGRESS_SPRITE = OreFarmingDevice.makeId("container/of_device/burn_progress");
+    private static final Identifier TEXTURE = OreFarmingDevice.makeId("textures/gui/container/of_device.png");
 
     public OFDeviceScreen(OFDeviceMenu menu, Inventory playerInventory, Component textComponent) {
         super(menu, playerInventory, textComponent);

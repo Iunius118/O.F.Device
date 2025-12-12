@@ -1,6 +1,6 @@
 package com.github.iunius118.orefarmingdevice.gametest;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraftforge.eventbus.api.bus.BusGroup;
 
 /**
@@ -13,7 +13,7 @@ import net.minecraftforge.eventbus.api.bus.BusGroup;
  * </pre>
  */
 public class ModGameTest {
-    static final ResourceLocation DEFAULT_STRUCTURE = ResourceLocation.fromNamespaceAndPath("forge", "empty3x3x3");
+    static final Identifier DEFAULT_STRUCTURE = Identifier.fromNamespaceAndPath("forge", "empty3x3x3");
 
     public static void register(BusGroup modBusGroup) {
         // Register game test functions

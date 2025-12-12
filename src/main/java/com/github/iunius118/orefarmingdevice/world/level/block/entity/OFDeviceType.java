@@ -1,7 +1,7 @@
 package com.github.iunius118.orefarmingdevice.world.level.block.entity;
 
 import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.Arrays;
 
@@ -21,7 +21,7 @@ public enum OFDeviceType {
         this.fuelConsumption = fuelConsumption;
     }
 
-    public static OFDeviceType valueOf (ResourceLocation id) {
+    public static OFDeviceType valueOf (Identifier id) {
         return Arrays.stream(OFDeviceType.values()).filter(t -> t.getId().equals(id)).findFirst().orElse(MOD_0);
     }
 
@@ -41,7 +41,7 @@ public enum OFDeviceType {
         return "container." + OreFarmingDevice.MOD_ID + "." + name;
     }
 
-    public ResourceLocation getId() {
+    public Identifier getId() {
         return OreFarmingDevice.makeId(name);
     }
 }

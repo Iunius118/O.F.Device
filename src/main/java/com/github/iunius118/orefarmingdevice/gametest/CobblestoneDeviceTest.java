@@ -129,7 +129,7 @@ public class CobblestoneDeviceTest {
     public static void registerTestInstance(DeferredRegisterData<GameTestInstance> register) {
         // Register cobblestone device test instances
         TEST_FUNCTIONS.forEach(key ->
-                register.register(key.location().getPath(), ctx ->
+                register.register(key.identifier().getPath(), ctx ->
                         getCobblestoneDeviceTestInstance(key, ctx.lookup(Registries.TEST_ENVIRONMENT)))
         );
     }
