@@ -1,6 +1,7 @@
 package com.github.iunius118.orefarmingdevice.gametest;
 
 import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
+import com.github.iunius118.orefarmingdevice.config.OreFarmingDeviceConfig;
 import com.github.iunius118.orefarmingdevice.loot.ModLootTables;
 import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootCondition;
 import com.github.iunius118.orefarmingdevice.world.item.ModItems;
@@ -73,7 +74,8 @@ public class OFDeviceLootTableTest {
         device.setItem(1, new ItemStack(Items.OAK_SIGN, 4));
 
         // Test
-        final int expectedProductCount = lootTable.getMaterial().is(ModItems.COBBLESTONE_FEEDER) ? 2 : 4;
+        final int expectedProductCount = (int) ((lootTable.getMaterial().is(ModItems.COBBLESTONE_FEEDER) ? 2 : 4)
+                / OreFarmingDeviceConfig.SERVER.getDeviceProcessingSpeed().getMultiplier());
         final int tick = device.getTotalProcessingTime() * expectedProductCount;
         helper.runAfterDelay(tick, () -> {
                     // Check products

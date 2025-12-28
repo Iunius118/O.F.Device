@@ -1,7 +1,9 @@
 package com.github.iunius118.orefarmingdevice.config;
 
+import com.github.iunius118.orefarmingdevice.world.level.block.entity.OFDeviceProcessingSpeed;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+import net.minecraftforge.common.ForgeConfigSpec.EnumValue;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class OreFarmingDeviceConfig {
@@ -10,6 +12,7 @@ public class OreFarmingDeviceConfig {
         public final BooleanValue canAccelerateProcessingSpeedByMod;
         public final BooleanValue canIncreaseFuelConsumptionByMod;
         public final BooleanValue isFarmingEfficiencyEnabled;
+        public final EnumValue<OFDeviceProcessingSpeed> deviceProcessingSpeed;
 
 
         Server(ForgeConfigSpec.Builder builder) {
@@ -53,6 +56,14 @@ public class OreFarmingDeviceConfig {
                             "  Default: true")
                     .define("increaseFuelConsumptionByMod", true);
 
+            deviceProcessingSpeed = builder
+                    .comment("===========================================================",
+                            "deviceProcessingSpeed as a string of \"HALF\", \"NORMAL\", or \"DOUBLE\"",
+                            "  Processing speed multiplier of OF Devices.",
+                            "  Options: HALF (x0.5), NORMAL (x1), DOUBLE (x2)",
+                            "  Default: \"NORMAL\"")
+                    .defineEnum("deviceProcessingSpeed", OFDeviceProcessingSpeed.NORMAL);
+
             builder.pop();
         }
 
@@ -70,6 +81,10 @@ public class OreFarmingDeviceConfig {
 
         public boolean isFarmingEfficiencyEnabled() {
             return SERVER_SPEC.isLoaded() ? isFarmingEfficiencyEnabled.get() : isFarmingEfficiencyEnabled.getDefault();
+        }
+
+        public OFDeviceProcessingSpeed getDeviceProcessingSpeed() {
+            return SERVER_SPEC.isLoaded() ? deviceProcessingSpeed.get() : deviceProcessingSpeed.getDefault();
         }
     }
 
