@@ -33,7 +33,7 @@ public class OreFarmingDevice {
         GatherDataEvent.getBus(modBusGroup).addListener(ModDataGenerator::gatherData);
         /* Disable data pack Experimental_1202 since 1.20.2
         // Register optional data pack handlers
-        AddPackFindersEvent.getBus(modBusGroup).addListener(Experimental1202DataProvider::addPackFinders);
+        AddPackFindersEvent.BUS.addListener(Experimental1202DataProvider::addPackFinders);
         //*/
 
         // Register game test handlers

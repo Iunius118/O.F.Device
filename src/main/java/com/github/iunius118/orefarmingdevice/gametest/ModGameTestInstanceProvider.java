@@ -29,7 +29,7 @@ public class ModGameTestInstanceProvider {
 
     public static void addListeners(final BusGroup modBusGroup) {
         GatherDataEvent.getBus(modBusGroup).addListener(ModGameTestInstanceProvider::addProviders);
-        AddPackFindersEvent.getBus(modBusGroup).addListener(ModGameTestInstanceProvider::addPackFinders);
+        AddPackFindersEvent.BUS.addListener(ModGameTestInstanceProvider::addPackFinders);
     }
 
     private static void addProviders(final GatherDataEvent event) {
