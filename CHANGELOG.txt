@@ -3,6 +3,9 @@
 [Source](https://github.com/Iunius118/O.F.Device).
 
 ## [Unreleased]
+### Added
+- Server-side config item: `deviceProcessingSpeed`.
+
 ### Fixed
 - Register mod recipe book category.
 

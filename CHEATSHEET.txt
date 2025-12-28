@@ -1,7 +1,7 @@
 # Cheatsheet
 
 [O.F.Device (Ore Farming Device)](https://github.com/Iunius118/O.F.Device)
-Version 12.0.0
+Version 12.1.0
 
 ## Blocks
 
@@ -97,6 +97,9 @@ Restart the game when you change the config. In multiplayer mode, server-side co
   - Whether to accelerate processing speed of device by modification
 - increaseFuelConsumptionByMod (boolean, default value is true)
   - Whether to increase fuel consumption of device by modification
+- deviceProcessingSpeed (string, default value is "NORMAL")
+  - Processing speed multiplier of OF Devices
+  - Allowed values: "HALF" (x0.5), "NORMAL" (x1), "DOUBLE" (x2)
 
 ## Modifying Product Tables
 
