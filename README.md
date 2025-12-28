@@ -200,6 +200,10 @@ Restart the game when you change the config. In multiplayer mode, server-side co
 - increaseFuelConsumptionByMod (boolean, default value is true)
   - Whether to increase fuel consumption of device by modification
   - ＯＦ装置の改造によって燃料消費量が増加するか（true→する、false→しない）
+- deviceProcessingSpeed (string, default value is "NORMAL") [v12.1+]
+  - Processing speed multiplier of OF Devices
+  - ＯＦ装置の処理速度の倍率。設定可能な値は以下の通り
+  - Allowed values: "HALF" (x0.5), "NORMAL" (x1), "DOUBLE" (x2)
 
 ## License
 
