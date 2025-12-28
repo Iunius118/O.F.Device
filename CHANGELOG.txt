@@ -3,6 +3,8 @@
 [Source](https://github.com/Iunius118/O.F.Device).
 
 ## [Unreleased]
+
+## [12.1.0 Forge]
 ### Added
 - Add option to change processing speed multiplier of devices.
 - Server-side config item: `deviceProcessingSpeed`.
