@@ -105,7 +105,7 @@ public class OFDeviceLootTableTest {
         );
     }
 
-    public static void registerTestInstance(RegisterGameTestsEvent event, Holder<TestEnvironmentDefinition> testEnvironment) {
+    public static void registerTestInstance(RegisterGameTestsEvent event, Holder<TestEnvironmentDefinition<?>> testEnvironment) {
         // Register loot table lookup test instances
         IntStream.range(0, TEST_FUNCTIONS.size()).forEach(index ->
                 event.registerTest(OreFarmingDevice.makeId("loot_table_%s".formatted(ModLootTables.values()[index].name().toLowerCase())),

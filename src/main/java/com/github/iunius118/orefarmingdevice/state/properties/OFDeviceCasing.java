@@ -1,6 +1,7 @@
 package com.github.iunius118.orefarmingdevice.state.properties;
 
 import net.minecraft.util.StringRepresentable;
+import org.jspecify.annotations.NonNull;
 
 public enum OFDeviceCasing implements StringRepresentable {
     NORMAL("normal"),
@@ -14,10 +15,11 @@ public enum OFDeviceCasing implements StringRepresentable {
 
     private final String name;
 
-    OFDeviceCasing(String typeName) {
+    OFDeviceCasing(@NonNull String typeName) {
         name = typeName;
     }
 
+    @Override
     public String toString() {
         return name;
     }

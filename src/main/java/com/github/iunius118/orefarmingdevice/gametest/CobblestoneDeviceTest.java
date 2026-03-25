@@ -145,7 +145,7 @@ public class CobblestoneDeviceTest {
         );
     }
 
-    public static void registerTestInstance(RegisterGameTestsEvent event, Holder<TestEnvironmentDefinition> testEnvironment) {
+    public static void registerTestInstance(RegisterGameTestsEvent event, Holder<TestEnvironmentDefinition<?>> testEnvironment) {
         // Register cobblestone device test instances
         TEST_FUNCTIONS.forEach(key ->
                 event.registerTest(key.identifier(),

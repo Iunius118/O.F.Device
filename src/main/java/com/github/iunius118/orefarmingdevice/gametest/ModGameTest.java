@@ -22,7 +22,7 @@ public class ModGameTest {
     }
 
     public static void onRegisterGameTestsEvent(final RegisterGameTestsEvent event) {
-        Holder<TestEnvironmentDefinition> testEnvironment = event.registerEnvironment(
+        Holder<TestEnvironmentDefinition<?>> testEnvironment = event.registerEnvironment(
                 OreFarmingDevice.makeId("default"), new TestEnvironmentDefinition.AllOf(List.of()));
         // Register game test instances
         OFDeviceLootTableTest.registerTestInstance(event, testEnvironment);

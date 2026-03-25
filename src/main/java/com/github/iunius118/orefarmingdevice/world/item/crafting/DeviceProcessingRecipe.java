@@ -10,15 +10,31 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
 import java.util.Optional;
 
+/**
+ * Dummy recipe class for devices.
+ * This is used when the device's processing recipe is requested from outside.
+ * Since it is a dummy recipe, the contents have no meaning.
+ */
 public class DeviceProcessingRecipe extends AbstractCookingRecipe {
+    public static final MapCodec<DeviceProcessingRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(
+            (instance) -> instance.group(
+                    Codec.STRING.optionalFieldOf("dummy").forGetter(recipe -> Optional.empty())
+            ).apply(instance, (dummy) -> new DeviceProcessingRecipe())
+    );
+    public static final StreamCodec<RegistryFriendlyByteBuf, DeviceProcessingRecipe> STREAM_CODEC = StreamCodec.of(
+            (b, r) -> {}, (b) -> new DeviceProcessingRecipe()
+    );
+    public static final RecipeSerializer<DeviceProcessingRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
+
     public DeviceProcessingRecipe() {
-        super("", CookingBookCategory.MISC, Ingredient.of(Items.COBBLESTONE), ItemStack.EMPTY, 0, 200);
+        super(new CommonInfo(false), new CookingBookInfo(CookingBookCategory.MISC, ""), Ingredient.of(Items.COBBLESTONE), new ItemStackTemplate(Items.STONE), 0, 200);
     }
 
     @Override
@@ -44,34 +60,6 @@ public class DeviceProcessingRecipe extends AbstractCookingRecipe {
 
     @Override
     public RecipeSerializer<DeviceProcessingRecipe> getSerializer() {
-        return ModRecipeSerializers.DEVICE_PROCESSING;
-    }
-
-    public static class Serializer implements RecipeSerializer<DeviceProcessingRecipe> {
-        private static final MapCodec<DeviceProcessingRecipe> CODEC = RecordCodecBuilder.mapCodec(
-                (instance) -> instance.group(
-                        Codec.STRING.optionalFieldOf("dummy").forGetter(recipe -> Optional.empty())
-                ).apply(instance, (dummy) -> new DeviceProcessingRecipe())
-        );
-        private static final StreamCodec<RegistryFriendlyByteBuf, DeviceProcessingRecipe> STREAM_CODEC = StreamCodec.of(
-                DeviceProcessingRecipe.Serializer::toNetwork, DeviceProcessingRecipe.Serializer::fromNetwork
-        );
-
-        @Override
-        public MapCodec<DeviceProcessingRecipe> codec() {
-            return CODEC;
-        }
-
-        @Override
-        public StreamCodec<RegistryFriendlyByteBuf, DeviceProcessingRecipe> streamCodec() {
-            return STREAM_CODEC;
-        }
-
-        private static DeviceProcessingRecipe fromNetwork(RegistryFriendlyByteBuf buffer) {
-            return new DeviceProcessingRecipe();
-        }
-
-        private static void toNetwork(RegistryFriendlyByteBuf buffer, DeviceProcessingRecipe recipe) {
-        }
+        return SERIALIZER;
     }
 }

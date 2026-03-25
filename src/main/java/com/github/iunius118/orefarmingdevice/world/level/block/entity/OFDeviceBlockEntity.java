@@ -8,6 +8,7 @@ import com.github.iunius118.orefarmingdevice.world.item.CobblestoneFeederItem;
 import com.github.iunius118.orefarmingdevice.world.item.CobblestoneFeederType;
 import com.github.iunius118.orefarmingdevice.world.item.crafting.ModRecipeTypes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
@@ -18,7 +19,9 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
@@ -146,18 +149,8 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
 
                 if (device.isLit()) {
                     // Handle fuel
+                    consumeFuel(device.items, fuelStack);
                     hasChanged = true;
-                    ItemStack remainderStack = fuelStack.getCraftingRemainder();
-
-                    if (!remainderStack.isEmpty()) {
-                        device.items.set(SLOT_FUEL, remainderStack);
-                    } else if (!fuelStack.isEmpty()) {
-                        fuelStack.shrink(1);
-
-                        if (fuelStack.isEmpty()) {
-                            device.items.set(SLOT_FUEL, remainderStack);
-                        }
-                    }
                 }
             }
 
@@ -207,6 +200,16 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
         }
 
         return false;
+    }
+
+    private static void consumeFuel(NonNullList<ItemStack> items, ItemStack fuel) {
+        Item fuelItem = fuel.getItem();
+        fuel.shrink(1);
+
+        if (fuel.isEmpty()) {
+            ItemStackTemplate remainder = fuelItem.getCraftingRemainder(fuel);
+            items.set(SLOT_FUEL, remainder != null ? remainder.create() : ItemStack.EMPTY);
+        }
     }
 
     public void updateFarmingEfficiency(Level level, BlockPos blockPos) {
