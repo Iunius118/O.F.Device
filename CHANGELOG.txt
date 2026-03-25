@@ -3,6 +3,8 @@
 [Source](https://github.com/Iunius118/O.F.Device).
 
 ## [Unreleased]
+### Changed
+- Require NeoForge 26.1.0.1-beta+.
 
 ## [12.1.0 NeoForge]
 ### Added
