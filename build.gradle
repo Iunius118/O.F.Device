@@ -34,17 +34,12 @@ base {
     archivesName = archives_base_name
 }
 
-// Mojang ships Java 25 to end users starting in 26.1, so mods should target Java 25.
+// Mojang ships Java 25 to end users in 26.1, so mods should target Java 25.
 java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
 neoForge {
     // Specify the version of NeoForge to use.
     version = project.neo_version
-
-    parchment {
-        mappingsVersion = project.parchment_mappings_version
-        minecraftVersion = project.parchment_minecraft_version
-    }
 
     // This line is optional. Access Transformers are automatically detected
     accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
@@ -168,7 +163,7 @@ sourceSets.main.resources.srcDir generateModMetadata
 neoForge.ideSyncTask generateModMetadata
 
 jar {
-    // Include docs in jar
+    // Insert documents into JAR file
     from("LICENSE.txt", "CHANGELOG.txt", "CHEATSHEET.txt", "CREDITS.txt")
 }
 

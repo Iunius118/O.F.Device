@@ -5,7 +5,7 @@
 ## [Unreleased]
 ### Changed
 - Port to 26.1.
-- Require NeoForge 26.1.0.1-beta+.
+- Require NeoForge 26.1.0.7-beta+.
 
 ## [12.1.0 NeoForge]
 ### Added
