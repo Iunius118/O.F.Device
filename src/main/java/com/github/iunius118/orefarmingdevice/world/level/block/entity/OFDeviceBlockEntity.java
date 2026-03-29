@@ -2,8 +2,8 @@ package com.github.iunius118.orefarmingdevice.world.level.block.entity;
 
 import com.github.iunius118.orefarmingdevice.config.OreFarmingDeviceConfig;
 import com.github.iunius118.orefarmingdevice.inventory.OFDeviceMenu;
-import com.github.iunius118.orefarmingdevice.loot.ModLootTables;
 import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootCondition;
+import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootTables;
 import com.github.iunius118.orefarmingdevice.world.item.CobblestoneFeederItem;
 import com.github.iunius118.orefarmingdevice.world.item.CobblestoneFeederType;
 import com.github.iunius118.orefarmingdevice.world.item.crafting.ModRecipeTypes;
@@ -71,7 +71,7 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
 
     private float farmingEfficiency = 0F;
     private int productCount = 0;
-    private ModLootTables lastProcessedLootTable = null;
+    private OFDeviceLootTables lastProcessedLootTable = null;
 
     public OFDeviceBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState, OFDeviceType ofDeviceType) {
         super(blockEntityType, blockPos, blockState, ModRecipeTypes.DEVICE_PROCESSING);
@@ -91,6 +91,7 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
     }
 
     public int getTotalProcessingTime() {
+        // Get processing time based on configuration and device type
         int processingTime = OreFarmingDeviceConfig.SERVER.canAccelerateProcessingSpeedByMod()
                 ? type.getTotalProcessingTime() : OFDeviceType.MOD_0.getTotalProcessingTime();
         float speedMultiplier = OreFarmingDeviceConfig.SERVER.getDeviceProcessingSpeed().getMultiplier();
@@ -98,6 +99,7 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
     }
 
     public int getFuelConsumption(boolean isFuelConsumptionDoubled) {
+        // Get fuel consumption based on configuration and device type
         int fuel = OreFarmingDeviceConfig.SERVER.canIncreaseFuelConsumptionByMod()
                 ? type.getFuelConsumption() : OFDeviceType.MOD_0.getFuelConsumption();
         return isFuelConsumptionDoubled ? fuel * 2 : fuel;
@@ -112,7 +114,7 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
         return productCount;
     }
 
-    public ModLootTables getLastProcessedLootTable() {
+    public OFDeviceLootTables getLastProcessedLootTable() {
         return lastProcessedLootTable;
     }
 
@@ -135,11 +137,12 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
         ItemStack materialStack = device.items.get(SLOT_INPUT);
 
         if (isLitOld) {
+            // Reduce device's remaining burn time
             device.litTimeRemaining -= device.getFuelConsumption(isFuelConsumptionDoubled(materialStack));
         }
 
         if ((device.isLit() || !fuelStack.isEmpty()) && !materialStack.isEmpty()) {
-            ModLootTables productLootTable = device.findLootTable(materialStack);
+            OFDeviceLootTables productLootTable = device.findLootTable(materialStack);
             boolean canProcess = device.canProcess(productLootTable);
 
             if (!device.isLit() && canProcess) {
@@ -180,7 +183,7 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
         }
 
         if (isLitOld != device.isLit()) {
-            // Switch on/off LIT of Device block
+            // Switch on/off LIT of device block
             level.setBlock(device.worldPosition, level.getBlockState(device.worldPosition).setValue(AbstractFurnaceBlock.LIT, device.isLit()), 3);
             hasChanged = true;
         }
@@ -196,6 +199,7 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
 
     private static boolean isFuelConsumptionDoubled(ItemStack stack) {
         if (stack.getItem() instanceof CobblestoneFeederItem feederItem) {
+            // Using OF C Feeder I as material doubles fuel consumption
             return feederItem.type == CobblestoneFeederType.BASIC;
         }
 
@@ -219,20 +223,21 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
         farmingEfficiency = Mth.clamp(size, 0F, MAX_EFFICIENCY);
     }
 
-    public ModLootTables findLootTable(ItemStack stack) {
-        return ModLootTables.find(this, stack).orElse(null);
+    public OFDeviceLootTables findLootTable(ItemStack stack) {
+        return OFDeviceLootTables.find(this, stack).orElse(null);
     }
 
-    private boolean canProcess(ModLootTables lootTableID) {
+    private boolean canProcess(OFDeviceLootTables lootTableID) {
         return !items.get(SLOT_INPUT).isEmpty() && lootTableID != null;
     }
 
-    private void process(ModLootTables productLootTable) {
+    private void process(OFDeviceLootTables productLootTable) {
         if (canProcess(productLootTable)) {
-            // For tests
+            // Save data for game testing
             productCount++;
             lastProcessedLootTable = productLootTable;
 
+            // Begin processing
             ItemStack materialStack = items.get(SLOT_INPUT);
             List<ItemStack> productStacks = getRandomItemsFromLootTable(productLootTable);
             insertToProductSlot(productStacks);
@@ -243,7 +248,7 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
         }
     }
 
-    private List<ItemStack> getRandomItemsFromLootTable(ModLootTables productLootTable) {
+    private List<ItemStack> getRandomItemsFromLootTable(OFDeviceLootTables productLootTable) {
         if (level == null)
             return Collections.emptyList();
 
@@ -271,7 +276,7 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
                 items.set(SLOT_RESULT, productStack.copy());
             } else if (ItemStack.isSameItem(productSlotStack, productStack)
                     && (productSlotStack.getCount() + productStack.getCount() <= Math.min(getMaxStackSize(), productSlotStack.getMaxStackSize()))) {
-                // Add same product item to item stack in product slot
+                // Add same product item to product slot stack if there is room
                 productSlotStack.grow(productStack.getCount());
             } else {
                 // Replace item stack in product slot with another item stack

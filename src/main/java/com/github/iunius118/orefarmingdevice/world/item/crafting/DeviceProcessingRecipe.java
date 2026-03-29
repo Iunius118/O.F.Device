@@ -1,7 +1,7 @@
 package com.github.iunius118.orefarmingdevice.world.item.crafting;
 
-import com.github.iunius118.orefarmingdevice.loot.ModLootTables;
 import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootCondition;
+import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootTables;
 import com.github.iunius118.orefarmingdevice.world.item.ModItems;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -40,7 +40,7 @@ public class DeviceProcessingRecipe extends AbstractCookingRecipe {
     @Override
     public boolean matches(SingleRecipeInput recipeInput, Level level) {
         ItemStack stack = recipeInput.item();
-        return ModLootTables.find(OFDeviceLootCondition.MOD_0_IN_SHALLOW_LAYER, stack).isPresent();
+        return OFDeviceLootTables.find(OFDeviceLootCondition.MOD_0_IN_SHALLOW_LAYER, stack).isPresent();
     }
 
     @Override

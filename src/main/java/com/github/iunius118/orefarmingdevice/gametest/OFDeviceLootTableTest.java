@@ -2,8 +2,8 @@ package com.github.iunius118.orefarmingdevice.gametest;
 
 import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
 import com.github.iunius118.orefarmingdevice.config.OreFarmingDeviceConfig;
-import com.github.iunius118.orefarmingdevice.loot.ModLootTables;
 import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootCondition;
+import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootTables;
 import com.github.iunius118.orefarmingdevice.world.item.ModItems;
 import com.github.iunius118.orefarmingdevice.world.level.block.ModBlocks;
 import com.github.iunius118.orefarmingdevice.world.level.block.OFDeviceBlock;
@@ -51,10 +51,10 @@ public class OFDeviceLootTableTest {
     }
 
     /**
-     * Test that {@link ModLootTables} returns the correct loot table for the specified device and coordinates.
+     * Test that {@link OFDeviceLootTables} returns the correct loot table for the specified device and coordinates.
      */
     private static void testLootTableLookup(GameTestHelper helper, int index) {
-        ModLootTables lootTable = ModLootTables.values()[index];
+        OFDeviceLootTables lootTable = OFDeviceLootTables.values()[index];
         OFDeviceLootCondition lootCondition = lootTable.getLootCondition();
         helper.assertFalse(lootCondition == OFDeviceLootCondition.NOT_APPLICABLE,
                 Component.literal("Device loot condition was not found."));
@@ -108,7 +108,7 @@ public class OFDeviceLootTableTest {
     public static void registerTestInstance(RegisterGameTestsEvent event, Holder<TestEnvironmentDefinition<?>> testEnvironment) {
         // Register loot table lookup test instances
         IntStream.range(0, TEST_FUNCTIONS.size()).forEach(index ->
-                event.registerTest(OreFarmingDevice.makeId("loot_table_%s".formatted(ModLootTables.values()[index].name().toLowerCase())),
+                event.registerTest(OreFarmingDevice.makeId("loot_table_%s".formatted(OFDeviceLootTables.values()[index].name().toLowerCase())),
                         new FunctionGameTestInstance(TEST_FUNCTIONS.get(index),
                                 new TestData<>(testEnvironment, ModGameTest.DEFAULT_STRUCTURE, LOOT_TABLE_LOOKUP_TEST_MAX_TICKS, 0, true))));
     }

@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public enum ModLootTables {
+public enum OFDeviceLootTables {
     DEVICE_0("device_0", Blocks.COBBLESTONE, OFDeviceLootCondition.is(OFDeviceType.MOD_0)),
     DEVICE_0_DEEP("device_0_d", Blocks.COBBLED_DEEPSLATE, OFDeviceLootCondition.is(OFDeviceType.MOD_0)),
     DEVICE_0_NETHER("device_0_n", Blocks.NETHERRACK, OFDeviceLootCondition.is(OFDeviceType.MOD_0)),
@@ -51,7 +51,7 @@ public enum ModLootTables {
     private final boolean isMaterialCobblestoneFeeder;
     private final Predicate<OFDeviceLootCondition> canProcess;
 
-    ModLootTables(String key, ItemLike item, Predicate<OFDeviceLootCondition> canProcess) {
+    OFDeviceLootTables(String key, ItemLike item, Predicate<OFDeviceLootCondition> canProcess) {
         this.id = OreFarmingDevice.makeId(key);
         this.resourceKey = ResourceKey.create(Registries.LOOT_TABLE, id);
         this.material = new ItemStackTemplate(item.asItem());
@@ -59,11 +59,11 @@ public enum ModLootTables {
         this.canProcess = canProcess;
     }
 
-    public static Optional<ModLootTables> find(OFDeviceBlockEntity device, ItemStack stack) {
+    public static Optional<OFDeviceLootTables> find(OFDeviceBlockEntity device, ItemStack stack) {
         return Arrays.stream(values()).filter(t -> t.canProcess(device, stack)).findFirst();
     }
 
-    public static Optional<ModLootTables> find(OFDeviceLootCondition lootCondition, ItemStack stack) {
+    public static Optional<OFDeviceLootTables> find(OFDeviceLootCondition lootCondition, ItemStack stack) {
         return Arrays.stream(values()).filter(t -> t.canProcess(lootCondition, stack)).findFirst();
     }
 

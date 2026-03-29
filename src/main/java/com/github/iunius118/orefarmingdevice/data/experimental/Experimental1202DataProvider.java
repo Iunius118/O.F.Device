@@ -1,7 +1,7 @@
 package com.github.iunius118.orefarmingdevice.data.experimental;
 
 import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
-import com.github.iunius118.orefarmingdevice.loot.ModLootTables;
+import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootTables;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.WritableRegistry;
@@ -82,7 +82,7 @@ public class Experimental1202DataProvider {
         @Override
         public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer) {
             // OF Device Mod 1
-            consumer.accept(ModLootTables.DEVICE_1_DEEP.getResourceKey(),
+            consumer.accept(OFDeviceLootTables.DEVICE_1_DEEP.getResourceKey(),
                     LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                             // DEEPSLATE - 3, DEEPSLATE_DIAMOND_ORE + 3
                             .add(LootItem.lootTableItem(Blocks.DEEPSLATE).setWeight(941).setQuality(-240))
@@ -97,7 +97,7 @@ public class Experimental1202DataProvider {
             );
 
             // OF Device Mod 2
-            consumer.accept(ModLootTables.DEVICE_2.getResourceKey(),
+            consumer.accept(OFDeviceLootTables.DEVICE_2.getResourceKey(),
                     LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                             // STONE - 2, AMETHYST_SHARD + 2
                             .add(LootItem.lootTableItem(Blocks.STONE).setWeight(839).setQuality(-240))
@@ -113,7 +113,7 @@ public class Experimental1202DataProvider {
                     )
             );
 
-            consumer.accept(ModLootTables.DEVICE_2_DEEP.getResourceKey(),
+            consumer.accept(OFDeviceLootTables.DEVICE_2_DEEP.getResourceKey(),
                     LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                             // DEEPSLATE - 7, DEEPSLATE_DIAMOND_ORE + 3, AMETHYST_SHARD + 4
                             .add(LootItem.lootTableItem(Blocks.DEEPSLATE).setWeight(931).setQuality(-240))

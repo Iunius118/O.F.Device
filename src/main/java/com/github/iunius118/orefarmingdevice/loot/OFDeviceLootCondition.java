@@ -29,8 +29,8 @@ public enum OFDeviceLootCondition {
         return (device.type == type) && ((device.getBlockPos().getY() <= 0) == isInDeepLayer);
     }
 
-    public static OFDeviceLootCondition find(OFDeviceBlockEntity deviceCondition) {
-        return Arrays.stream(values()).filter(c -> c.test(deviceCondition)).findFirst().orElse(NOT_APPLICABLE);
+    public static OFDeviceLootCondition find(OFDeviceBlockEntity device) {
+        return Arrays.stream(values()).filter(c -> c.test(device)).findFirst().orElse(NOT_APPLICABLE);
     }
 
     public static OFDeviceLootCondition fromInt(int i) {
