@@ -20,6 +20,7 @@ import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContextSource;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
@@ -180,6 +181,55 @@ public class ModLootTableProvider extends LootTableProvider {
                             .add(LootItem.lootTableItem(Blocks.NETHER_QUARTZ_ORE).setWeight(30))
                             .add(LootItem.lootTableItem(Blocks.NETHER_GOLD_ORE).setWeight(10))
                             .add(LootItem.lootTableItem(Blocks.ANCIENT_DEBRIS).setWeight(1))
+                    )
+            );
+
+            // OF Device Mod 2 with OF C Feeder T
+            consumer.accept(OFDeviceLootTables.DEVICE_2_FEED_TNT.getResourceKey(),
+                    LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                            .add(LootItem.lootTableItem(Blocks.COBBLESTONE).setWeight(839).setQuality(-240)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
+                            .add(LootItem.lootTableItem(Items.COAL).setWeight(50)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
+                            .add(LootItem.lootTableItem(Blocks.RAW_COPPER_BLOCK).setWeight(47))
+                            .add(LootItem.lootTableItem(Blocks.LAPIS_BLOCK).setWeight(4)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))))
+                            .add(LootItem.lootTableItem(Items.RAW_IRON).setWeight(30)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
+                            .add(LootItem.lootTableItem(Items.RAW_GOLD).setWeight(20)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
+                            .add(LootItem.lootTableItem(Blocks.REDSTONE_BLOCK).setWeight(5)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))))
+                            .add(LootItem.lootTableItem(Items.DIAMOND).setWeight(1)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
+                            .add(LootItem.lootTableItem(Items.EMERALD).setWeight(2)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
+                            .add(LootItem.lootTableItem(Items.AMETHYST_SHARD).setWeight(2)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
+                    )
+            );
+
+            consumer.accept(OFDeviceLootTables.DEVICE_2_FEED_TNT_DEEP.getResourceKey(),
+                    LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                            .add(LootItem.lootTableItem(Blocks.COBBLED_DEEPSLATE).setWeight(931).setQuality(-240)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
+                            .add(LootItem.lootTableItem(Items.COAL).setWeight(3)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
+                            .add(LootItem.lootTableItem(Blocks.RAW_COPPER_BLOCK).setWeight(11))
+                            .add(LootItem.lootTableItem(Blocks.LAPIS_BLOCK).setWeight(4)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))))
+                            .add(LootItem.lootTableItem(Items.RAW_IRON).setWeight(11)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
+                            .add(LootItem.lootTableItem(Items.RAW_GOLD).setWeight(6)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
+                            .add(LootItem.lootTableItem(Blocks.REDSTONE_BLOCK).setWeight(20)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))))
+                            .add(LootItem.lootTableItem(Items.DIAMOND).setWeight(9)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
+                            .add(LootItem.lootTableItem(Items.EMERALD).setWeight(1)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
+                            .add(LootItem.lootTableItem(Items.AMETHYST_SHARD).setWeight(4)
+                                    .apply(SetItemCountFunction.setCount(ConstantValue.exactly(3))))
                     )
             );
         }

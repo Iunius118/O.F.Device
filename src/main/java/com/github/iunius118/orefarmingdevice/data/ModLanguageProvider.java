@@ -32,6 +32,7 @@ public class ModLanguageProvider extends LanguageProvider {
         public String cobblestoneDeviceName = "OF C Device";
         public String cobblestoneFeederName = "OF C Feeder I";
         public String cobblestoneFeeder2Name = "OF C Feeder II";
+        public String cobblestoneFeederTNTName = "OF C Feeder T";
     }
 
     // ja_jp
@@ -43,6 +44,7 @@ public class ModLanguageProvider extends LanguageProvider {
             cobblestoneDeviceName = "ＯＦ丙装置";
             cobblestoneFeederName = "ＯＦ丙供給装置一型";
             cobblestoneFeeder2Name = "ＯＦ丙供給装置二型";
+            cobblestoneFeederTNTName = "ＯＦ丙供給装置丁型";
         }
     }
 
@@ -54,6 +56,7 @@ public class ModLanguageProvider extends LanguageProvider {
         // Items
         add(ModItems.COBBLESTONE_FEEDER, translatedNameProvider.cobblestoneFeederName);
         add(ModItems.COBBLESTONE_FEEDER_2, translatedNameProvider.cobblestoneFeeder2Name);
+        add(ModItems.COBBLESTONE_FEEDER_TNT, translatedNameProvider.cobblestoneFeederTNTName);
 
         // Blocks
         add(ModBlocks.DEVICE_0, translatedNameProvider.deviceModZeroName);

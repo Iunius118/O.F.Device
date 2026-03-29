@@ -1,4 +1,4 @@
-// 26.1	2026-03-25T19:28:26.0291408	Model Definitions - orefarmingdevice
+// 26.1	2026-03-29T16:17:11.8681089	Model Definitions - orefarmingdevice
 61735bdb0f5268b5e892104c96d295a0654fa027 assets/orefarmingdevice/blockstates/cobblestone_device_0.json
 da58b8fa94788199a6e9cf8cd4fda1f2a7a94d19 assets/orefarmingdevice/blockstates/device_0.json
 66b149ccf4fa8f35289a0f8e45c1daba01f3152a assets/orefarmingdevice/blockstates/device_1.json
@@ -6,6 +6,7 @@ da58b8fa94788199a6e9cf8cd4fda1f2a7a94d19 assets/orefarmingdevice/blockstates/dev
 24966b3576d2e22833d2f8b1615256ad4151040d assets/orefarmingdevice/items/cobblestone_device_0.json
 6fb62b8508cbff28ff20f213a88f08dda7fb22d3 assets/orefarmingdevice/items/cobblestone_feeder.json
 998f30c8b8caca69c141b56b1666186550ec91ef assets/orefarmingdevice/items/cobblestone_feeder_2.json
+c4d10705f511db18ceb926940736d6acf348023c assets/orefarmingdevice/items/cobblestone_feeder_tnt.json
 647b162a59099cc8acba009770a6853629552987 assets/orefarmingdevice/items/device_0.json
 97e5cf08c8ee2b9dd4b43f7d748e5c3c881b7609 assets/orefarmingdevice/items/device_1.json
 d0ca5d0fe112b4c16069a27be1f2756d986951fa assets/orefarmingdevice/items/device_2.json
@@ -60,3 +61,4 @@ c2b082fae4cbbd73fde56786e82aa8397a456133 assets/orefarmingdevice/models/block/de
 5896412d94aa4921642b6b308b2f44eea2fd99a9 assets/orefarmingdevice/models/block/device_2_on_6.json
 b878fb34e92da20308db1c70ebf28319e1577841 assets/orefarmingdevice/models/item/cobblestone_feeder.json
 1fa64189c682802b657d447aa4c728bebb4b65ed assets/orefarmingdevice/models/item/cobblestone_feeder_2.json
+db1a9257319f834099c7ef10d1415fc0637849d1 assets/orefarmingdevice/models/item/cobblestone_feeder_tnt.json

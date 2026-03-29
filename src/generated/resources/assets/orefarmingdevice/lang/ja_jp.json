@@ -9,5 +9,6 @@
   "container.orefarmingdevice.device_2": "ＯＦ装置改二",
   "item.orefarmingdevice.cobblestone_feeder": "ＯＦ丙供給装置一型",
   "item.orefarmingdevice.cobblestone_feeder_2": "ＯＦ丙供給装置二型",
+  "item.orefarmingdevice.cobblestone_feeder_tnt": "ＯＦ丙供給装置丁型",
   "itemGroup.orefarmingdevice.main": "O.F.Device"
 }

@@ -182,7 +182,48 @@
 
 - Improved version of Feeder I with no increase in fuel consumption
 
+### OF C Feeder T (ＯＦ丙供給装置丁型)
+
+- Improved version of Feeder II with about three times the efficiency
+- This item can only be used with OF Device Mod 2
+
+**Table 2.4.0.1:** Loot Table of OF C Feeder T by OF Device Mod 2
+
+| Item                     | MC 1.16 | MC 1.17 | MC 1.18 |
+|--------------------------|--------:|--------:|--------:|
+| Cobblestone x3           |  88.20% |  86.80% |  83.90% |
+| Coal x3                  |   5.00% |   5.00% |   5.00% |
+| Block of Raw Copper      |     N/A |   1.00% |   4.70% |
+| Block of Lapis Lazuli x2 |   0.40% |   0.40% |   0.40% |
+| Raw Iron x3              |   3.00% |   3.00% |   3.00% |
+| Raw Gold x3              |   1.00% |   1.00% |   2.00% |
+| Block of Redstone x2     |   2.00% |   2.00% |   0.50% |
+| Diamond x3               |   0.30% |   0.30% |   0.10% |
+| Emerald x3               |   0.10% |   0.10% |   0.20% |
+| Amethyst Shard x3        |     N/A |   0.40% |   0.20% |
+
+**Table 2.4.0.2:** Loot Table of OF C Feeder T by OF Device Mod 2
+
+| Item                     | MC 1.17 | MC 1.18 | MC 1.20.2 |
+|--------------------------|--------:|--------:|----------:|
+| Cobbled Deepslate x3     |  85.60% |  93.40% |    93.10% |
+| Coal x3                  |   5.00% |   0.30% |     0.30% |
+| Block of Raw Copper      |   0.60% |   1.10% |     1.10% |
+| Block of Lapis Lazuli x2 |   0.40% |   0.40% |     0.40% |
+| Raw Iron x3              |   3.00% |   1.10% |     1.10% |
+| Raw Gold x3              |   0.60% |   0.60% |     0.60% |
+| Block of Redstone x2     |   4.00% |   2.00% |     2.00% |
+| Diamond x3               |   0.50% |   0.60% |     0.90% |
+| Emerald x3               |   0.10% |   0.10% |     0.10% |
+| Amethyst Shard x3        |   0.20% |   0.40% |     0.40% |
+
 ## Data Pack
+
+### OF C Feeder T recipes [Only v13.0.0]
+
+ID: `orefarmingdevice:feeder_t_recipes`
+
+A data pack to add OF C Feeder T recipes.
 
 ### Experimental Data Pack 1.20.2 [Only v0.8.0]
 

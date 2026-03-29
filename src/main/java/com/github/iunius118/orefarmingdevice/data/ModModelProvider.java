@@ -47,6 +47,7 @@ public class ModModelProvider extends ModelProvider {
         addBlockItemModel(itemModelOutput, (BlockItem) ModItems.COBBLESTONE_DEVICE_0, "_0");
         itemModels.generateFlatItem(ModItems.COBBLESTONE_FEEDER, ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.COBBLESTONE_FEEDER_2, ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.COBBLESTONE_FEEDER_TNT, ModelTemplates.FLAT_ITEM);
     }
 
     private MultiVariantGenerator createOFDevice(BlockModelGenerators blockModels, OFDeviceBlock block) {

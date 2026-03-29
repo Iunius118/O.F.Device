@@ -19,6 +19,7 @@ public class ModItemRegistry {
     public static final DeferredItem<BlockItem> COBBLESTONE_DEVICE_0 = ITEMS.registerSimpleBlockItem(CobblestoneDeviceType.BASIC.getName(), ModBlockRegistry.COBBLESTONE_DEVICE_0);
     public static final DeferredItem<Item> COBBLESTONE_FEEDER = registerCobblestoneFeederItem(CobblestoneFeederType.BASIC.getName(), CobblestoneFeederType.BASIC);
     public static final DeferredItem<Item> COBBLESTONE_FEEDER_2 = registerCobblestoneFeederItem(CobblestoneFeederType.UPGRADED.getName(), CobblestoneFeederType.UPGRADED);
+    public static final DeferredItem<Item> COBBLESTONE_FEEDER_TNT = registerCobblestoneFeederItem(CobblestoneFeederType.TNT.getName(), CobblestoneFeederType.TNT);
 
     private static DeferredItem<Item> registerCobblestoneFeederItem(String name, CobblestoneFeederType type) {
         return ITEMS.registerItem(name, p -> new CobblestoneFeederItem(type, p));
