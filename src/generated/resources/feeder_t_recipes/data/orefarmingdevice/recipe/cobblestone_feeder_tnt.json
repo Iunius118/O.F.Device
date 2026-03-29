@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": "minecraft:hopper",
+    "O": "minecraft:observer",
+    "P": "minecraft:piston",
+    "R": "minecraft:repeater",
+    "T": "minecraft:tnt",
+    "f": "orefarmingdevice:cobblestone_feeder_2"
+  },
+  "pattern": [
+    "PTP",
+    "OHO",
+    "RfR"
+  ],
+  "result": {
+    "id": "orefarmingdevice:cobblestone_feeder_tnt"
+  }
+}

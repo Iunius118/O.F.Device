@@ -1,0 +1,10 @@
+{
+  "pack": {
+    "description": "O.F.Device - OF C Feeder T recipes",
+    "max_format": 101,
+    "min_format": [
+      101,
+      1
+    ]
+  }
+}

@@ -3,6 +3,10 @@
 [Source](https://github.com/Iunius118/O.F.Device).
 
 ## [Unreleased]
+### Added
+- Add OF C Feeder T.
+- Built-in optional data pack `orefarmingdevice:feeder_t_recipes` to add OF C Feeder T recipes.
+
 ### Changed
 - Port to 26.1.
 - Require NeoForge 26.1.0.7-beta+.

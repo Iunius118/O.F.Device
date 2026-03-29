@@ -122,6 +122,7 @@ public class ModRecipeProvider extends VanillaRecipeProvider {
 
         // Cobblestone Devise -> Cobblestone Feeder II
         ShapelessRecipeBuilder.shapeless(holderGetter, RecipeCategory.MISC, ModItems.COBBLESTONE_FEEDER_2)
+                .group(OreFarmingDevice.MOD_ID + ":feeders_to_feeder_2")
                 .requires(ModItems.COBBLESTONE_DEVICE_0)
                 .unlockedBy("has_c_device", has(ModItems.COBBLESTONE_DEVICE_0))
                 .save(output, OreFarmingDevice.MOD_ID + ":c_device_to_feeder_2");
@@ -135,10 +136,12 @@ public class ModRecipeProvider extends VanillaRecipeProvider {
         public Runner(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
             super(output, registries);
         }
+
         @Override
         protected RecipeProvider createRecipeProvider(HolderLookup.Provider registryLookup, RecipeOutput output) {
             return new ModRecipeProvider(registryLookup, output);
         }
+
         @Override
         public String getName() {
             return "Recipes";

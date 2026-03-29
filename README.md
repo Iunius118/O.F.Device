@@ -15,7 +15,7 @@ O.F.Device is a Minecraft mod to add devices for farming ores.
 
 ## Description
 
-Version 12.1.0
+Version 13.0.0
 
 ### OF Device (ＯＦ装置)
 
@@ -151,6 +151,20 @@ OF C Feeder II + Bucket -> Lava Bucket
 
 OF C Feeder II + Stick -> Diamond Pickaxe
 
+### OF C Feeder T (ＯＦ丙供給装置丁型)
+
+OF C Feeder T is the improved version of Feeder II with about three times the efficiency.
+
+ＯＦ丙供給装置二型の改良版。効率が約3倍になる。
+
+This item can only be used with OF Device Mod 2.
+
+ＯＦ装置改二でのみ使用可能。
+
+This item's recipe becomes available when the built-in data pack (`orefarmingdevice:feeder_t_recipes`) is enabled.
+
+クラフトレシピはmod同梱のデータパック（`orefarmingdevice:feeder_t_recipes`）を有効にすると追加される。
+
 ### OF C Device (ＯＦ丙装置)
 
 OF C Device is a cobblestone generator.
@@ -171,11 +185,39 @@ Hopper can be used to pull cobblestones from underside of the device.
 
 装置の下面にホッパーを接続して丸石の搬出が可能。
 
-#### Recycling Recipes
+#### Recycling Recipe
 
-![ ](./docs/media/recipe_c_device_to_feeder_2_v110.png "Crafting recipe: OF C Feeder II")
+![ ](./docs/media/recipe_c_device_to_feeder_2_v110.png "Crafting recipe: OF C Device to OF C Feeder II")
 
 OF C Device -> OF C Feeder II
+
+### Data Pack
+
+Built-in optional data pack.
+
+任意で適用可能な同梱のデータパック。
+
+#### OF C Feeder T recipes
+
+**[Only v13.0.0]**
+
+ID: `orefarmingdevice:feeder_t_recipes`
+
+A data pack to add OF C Feeder T recipes.
+
+ＯＦ丙供給装置丁型のレシピを追加するデータパック。
+
+**Recipe**:
+
+![ ](./docs/media/recipe_cobblestone_feeder_tnt_v1300.png "Crafting recipe: OF C Feeder T")
+
+2 Pistons + TNT + 2 Observers + Hopper + 2 Redstone Repeaters + OF C Feeder II
+
+**Recycling Recipe**:
+
+![ ](./docs/media/recipe_feeder_tnt_to_feeder_2_v1300.png "Crafting recipe: OF C Feeder T to OF C Feeder II")
+
+OF C Feeder T -> OF C Feeder II
 
 ### Config
 
