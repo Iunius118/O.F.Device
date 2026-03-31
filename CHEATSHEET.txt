@@ -1,6 +1,7 @@
 # Cheatsheet
+
 [O.F.Device (Ore Farming Device)](https://github.com/Iunius118/O.F.Device)
-Version 12.1.0
+Version 13.0.0
 
 ## Blocks
 
@@ -80,6 +81,12 @@ Version 12.1.0
 - Recycling recipe (crafting): OF C Feeder II + Bucket -> Lava Bucket
 - Recycling recipe (crafting): OF C Feeder II + Stick -> Diamond Pickaxe
 
+### OF C Feeder T
+
+- Improved version of Feeder II with about three times the efficiency
+- This item can only be used with OF Device Mod 2
+- This item's recipe becomes available when the built-in data pack (`orefarmingdevice:feeder_t_recipes`) is enabled
+
 ## Config
 
 `<world_save_dir>/serverconfig/orefarmingdevice-server.toml`
@@ -100,7 +107,8 @@ Restart the game when you change the config. In multiplayer mode, server-side co
 
 ## Modifying Product Tables
 
-The products and their probabilities of each device can be modified using loot table in data pack. JSON files for the loot tables corresponding to each device are as follows.
+The products and their probabilities of each device can be modified using loot table in data pack.
+JSON files for the loot tables corresponding to each device are as follows.
 
 Here is the formula for the corrected weight: `weight + (farming_efficiency * quality)`.
 
@@ -118,6 +126,28 @@ OF Device Mod 1:
 
 OF Device Mod 2:
 
-- Cobblestone:       `(data_pack_root)/data/orefarmingdevice/loot_table/device_2.json`
-- Cobbled deepslate: `(data_pack_root)/data/orefarmingdevice/loot_table/device_2_d.json`
-- Netherrack:        `(data_pack_root)/data/orefarmingdevice/loot_table/device_2_n.json`
+- Cobblestone:          `(data_pack_root)/data/orefarmingdevice/loot_table/device_2.json`
+- Cobbled deepslate:    `(data_pack_root)/data/orefarmingdevice/loot_table/device_2_d.json`
+- Netherrack:           `(data_pack_root)/data/orefarmingdevice/loot_table/device_2_n.json`
+- OF C Feeder T (Y>=1): `(data_pack_root)/data/orefarmingdevice/loot_table/device_2_tnt.json`
+- OF C Feeder T (Y<=0): `(data_pack_root)/data/orefarmingdevice/loot_table/device_2_tnt_d.json`
+
+## Data Pack
+
+Built-in optional data pack
+
+### OF C Feeder T recipes
+
+ID: `orefarmingdevice:feeder_t_recipes`
+
+A data pack to add OF C Feeder T recipes.
+
+Feature:
+
+- Recipe (P = Piston, T = TNT, O = Observer, H = Hopper, R = Redstone Repeater, f = OF C Feeder II):
+
+      P T P
+      O H O
+      R f R
+
+- Recycling recipe (crafting): OF C Feeder T -> OF C Feeder II

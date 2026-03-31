@@ -3,8 +3,11 @@
 [Source](https://github.com/Iunius118/O.F.Device).
 
 ## [Unreleased]
+
+## [13.0.0 Forge]
 ### Added
 - Add OF C Feeder T.
+- Add loot tables for OF C Feeder T.
 - Built-in optional data pack `orefarmingdevice:feeder_t_recipes` to add OF C Feeder T recipes.
 
 ### Changed
