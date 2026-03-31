@@ -96,7 +96,7 @@ The default config file is saved to the following path:
 Restart the game when you change the config. In multiplayer mode, server-side config will be used.
 
 - isCobblestoneFeederAvailable (boolean, default value is true)
-  - Whether OF Cobblestone Feeder is available for devices
+  - Whether OF C Feeders are available for devices
 - enableFarmingEfficiency (boolean, default value is true)
   - Whether mobs around device increase farming efficiency of device
 - accelerateProcessingSpeedByMod (boolean, default value is true)
