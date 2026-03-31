@@ -19,7 +19,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.Level;
@@ -207,13 +206,12 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
     }
 
     private static void consumeFuel(NonNullList<ItemStack> items, ItemStack fuel) {
-        Item fuelItem = fuel.getItem();
-        fuel.shrink(1);
-
-        if (fuel.isEmpty()) {
-            ItemStackTemplate remainder = fuelItem.getCraftingRemainder(fuel);
+        if (fuel.count() == 1) {
+            ItemStackTemplate remainder = fuel.getCraftingRemainder();
             items.set(SLOT_FUEL, remainder != null ? remainder.create() : ItemStack.EMPTY);
         }
+
+        fuel.shrink(1);
     }
 
     public void updateFarmingEfficiency(Level level, BlockPos blockPos) {
