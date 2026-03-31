@@ -133,8 +133,8 @@ public class ModRecipeProvider extends VanillaRecipeProvider {
     }
 
     public static class Runner extends RecipeProvider.Runner {
-        public Runner(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-            super(output, registries);
+        public Runner(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> registries) {
+            super(packOutput, registries);
         }
 
         @Override
