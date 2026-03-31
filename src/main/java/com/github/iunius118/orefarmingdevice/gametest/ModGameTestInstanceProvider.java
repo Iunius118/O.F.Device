@@ -55,11 +55,10 @@ public class ModGameTestInstanceProvider {
 
         var pack = Pack.readMetaAndCreate(
                 new PackLocationInfo(PACK_ID.toString(), Component.literal(PACK_PATH),
-                        // This is an optional pack
-                        PackSource.create(PackSource.NO_DECORATION, false),
+                        PackSource.DEFAULT,
                         // Add KnownPack as this is not an experimental data pack
                         Optional.of(new KnownPack(OreFarmingDevice.MOD_ID, PACK_PATH, "1.0"))),
-                new PathPackResources.PathResourcesSupplier(ModList.get().getModFileById(OreFarmingDevice.MOD_ID).getFile().findResource(PACK_PATH)),
+                new PathPackResources.PathResourcesSupplier(ModList.getModFileById(OreFarmingDevice.MOD_ID).getFile().findResource(PACK_PATH)),
                 PackType.SERVER_DATA,
                 new PackSelectionConfig(false, Pack.Position.BOTTOM, false));
 

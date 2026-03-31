@@ -7,8 +7,6 @@ import net.minecraftforge.eventbus.api.bus.BusGroup;
  * Game test registration class for Ore Farming Device mod.
  *
  * <pre>
- *     /datapack enable "orefarmingdevice:ofdevice_mod_game_tests"
- *     /reload
  *     /test runmultiple orefarmingdevice:*
  * </pre>
  */

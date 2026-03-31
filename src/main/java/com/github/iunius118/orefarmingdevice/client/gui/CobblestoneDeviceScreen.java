@@ -2,7 +2,7 @@ package com.github.iunius118.orefarmingdevice.client.gui;
 
 import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
 import com.github.iunius118.orefarmingdevice.inventory.CobblestoneDeviceMenu;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
@@ -13,9 +13,7 @@ public class CobblestoneDeviceScreen extends AbstractContainerScreen<Cobblestone
     private static final Identifier TEXTURE = OreFarmingDevice.makeId("textures/gui/container/c_feeder.png");
 
     public CobblestoneDeviceScreen(CobblestoneDeviceMenu menu, Inventory playerInventory, Component textComponent) {
-        super(menu, playerInventory, textComponent);
-        this.imageHeight = 133;
-        this.inventoryLabelY = this.imageHeight - 94;
+        super(menu, playerInventory, textComponent, 176, 133);
     }
 
     @Override
@@ -25,16 +23,10 @@ public class CobblestoneDeviceScreen extends AbstractContainerScreen<Cobblestone
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float renderTicks) {
-        renderBackground(guiGraphics, mouseX, mouseY, renderTicks);
-        super.render(guiGraphics, mouseX, mouseY, renderTicks);
-        renderTooltip(guiGraphics, mouseX, mouseY);
-    }
-
-    @Override
-    protected void renderBg(GuiGraphics guiGraphics, float renderTicks, int mouseX, int mouseY) {
+    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float renderTicks) {
+        super.extractBackground(graphics, mouseX, mouseY, renderTicks);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
-        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);
     }
 }

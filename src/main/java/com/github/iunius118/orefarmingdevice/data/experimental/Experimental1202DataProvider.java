@@ -1,7 +1,7 @@
 package com.github.iunius118.orefarmingdevice.data.experimental;
 
 import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
-import com.github.iunius118.orefarmingdevice.loot.ModLootTables;
+import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootTables;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
@@ -25,7 +25,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.ValidationContextSource;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -65,7 +65,7 @@ public class Experimental1202DataProvider {
 
         var knownPack = new KnownPack(OreFarmingDevice.MOD_ID, PACK_PATH, "1.0");
         var packInfo = new PackLocationInfo(PACK_ID.toString(), Component.literal(PACK_PATH), PackSource.FEATURE, Optional.of(knownPack));
-        var resourcePath = ModList.get().getModFileById(OreFarmingDevice.MOD_ID).getFile().findResource(PACK_PATH);
+        var resourcePath = ModList.getModFileById(OreFarmingDevice.MOD_ID).getFile().findResource(PACK_PATH);
         var packConfig = new PackSelectionConfig(false, Pack.Position.TOP, false);
         var pack = Pack.readMetaAndCreate(packInfo, new PathPackResources.PathResourcesSupplier(resourcePath), PackType.SERVER_DATA, packConfig);
 
@@ -87,7 +87,8 @@ public class Experimental1202DataProvider {
         }
 
         @Override
-        protected void validate(Registry<LootTable> map, ValidationContext validationcontext, ProblemReporter report) {
+        protected void validate(Registry<LootTable> map, ValidationContextSource validationcontext, ProblemReporter report) {
+            // Do not validate against all registered loot tables
         }
     }
 
@@ -101,7 +102,7 @@ public class Experimental1202DataProvider {
         @Override
         public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer) {
             // OF Device Mod 1
-            consumer.accept(ModLootTables.DEVICE_1_DEEP.getResourceKey(),
+            consumer.accept(OFDeviceLootTables.DEVICE_1_DEEP.getResourceKey(),
                     LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                             // DEEPSLATE - 3, DEEPSLATE_DIAMOND_ORE + 3
                             .add(LootItem.lootTableItem(Blocks.DEEPSLATE).setWeight(941).setQuality(-240))
@@ -116,7 +117,7 @@ public class Experimental1202DataProvider {
             );
 
             // OF Device Mod 2
-            consumer.accept(ModLootTables.DEVICE_2.getResourceKey(),
+            consumer.accept(OFDeviceLootTables.DEVICE_2.getResourceKey(),
                     LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                             // STONE - 2, AMETHYST_SHARD + 2
                             .add(LootItem.lootTableItem(Blocks.STONE).setWeight(839).setQuality(-240))
@@ -132,7 +133,7 @@ public class Experimental1202DataProvider {
                     )
             );
 
-            consumer.accept(ModLootTables.DEVICE_2_DEEP.getResourceKey(),
+            consumer.accept(OFDeviceLootTables.DEVICE_2_DEEP.getResourceKey(),
                     LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
                             // DEEPSLATE - 7, DEEPSLATE_DIAMOND_ORE + 3, AMETHYST_SHARD + 4
                             .add(LootItem.lootTableItem(Blocks.DEEPSLATE).setWeight(931).setQuality(-240))

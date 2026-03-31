@@ -1,7 +1,7 @@
 package com.github.iunius118.orefarmingdevice.inventory;
 
-import com.github.iunius118.orefarmingdevice.loot.ModLootTables;
 import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootCondition;
+import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootTables;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -102,7 +102,7 @@ public class OFDeviceMenu extends AbstractContainerMenu {
     protected boolean canSmelt(ItemStack stack) {
         int i = this.data.get(4);
         OFDeviceLootCondition condition = OFDeviceLootCondition.fromInt(i);
-        return ModLootTables.find(condition, stack).isPresent();
+        return OFDeviceLootTables.find(condition, stack).isPresent();
     }
 
     protected boolean isFuel(ItemStack stack) {

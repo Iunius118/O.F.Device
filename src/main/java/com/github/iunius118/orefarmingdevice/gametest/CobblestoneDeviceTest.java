@@ -135,7 +135,7 @@ public class CobblestoneDeviceTest {
     }
 
     private static FunctionGameTestInstance getCobblestoneDeviceTestInstance(ResourceKey<Consumer<GameTestHelper>> testFunction,
-                                                                        HolderGetter<TestEnvironmentDefinition> testEnvGetter) {
+                                                                        HolderGetter<TestEnvironmentDefinition<?>> testEnvGetter) {
         return new FunctionGameTestInstance(testFunction,
                 new TestData<>(testEnvGetter.getOrThrow(GameTestEnvironments.DEFAULT_KEY),
                         ModGameTest.DEFAULT_STRUCTURE, COBBLESTONE_DEVICE_TEST_MAX_TICKS, 0, true));

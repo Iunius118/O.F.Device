@@ -4,8 +4,8 @@ import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
 import com.github.iunius118.orefarmingdevice.inventory.ModMenuTypes;
 import com.github.iunius118.orefarmingdevice.world.item.ModCreativeModeTabs;
 import com.github.iunius118.orefarmingdevice.world.item.ModItemRegistry;
+import com.github.iunius118.orefarmingdevice.world.item.crafting.DeviceProcessingRecipe;
 import com.github.iunius118.orefarmingdevice.world.item.crafting.ModRecipeBookCategories;
-import com.github.iunius118.orefarmingdevice.world.item.crafting.ModRecipeSerializers;
 import com.github.iunius118.orefarmingdevice.world.item.crafting.ModRecipeTypes;
 import com.github.iunius118.orefarmingdevice.world.level.block.ModBlockRegistry;
 import com.github.iunius118.orefarmingdevice.world.level.block.entity.CobblestoneDeviceType;
@@ -58,7 +58,7 @@ public class RegisterEventHandler {
     private static void registerRecipeSerializers(BusGroup modBusGroup) {
         var recipeSerializerRegister = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, OreFarmingDevice.MOD_ID);
 
-        recipeSerializerRegister.register("device_processing", () -> ModRecipeSerializers.DEVICE_PROCESSING);
+        recipeSerializerRegister.register("device_processing", () -> DeviceProcessingRecipe.SERIALIZER);
 
         recipeSerializerRegister.register(modBusGroup);
     }

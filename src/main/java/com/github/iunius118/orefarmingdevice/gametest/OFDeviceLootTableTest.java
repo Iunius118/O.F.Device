@@ -2,8 +2,8 @@ package com.github.iunius118.orefarmingdevice.gametest;
 
 import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
 import com.github.iunius118.orefarmingdevice.config.OreFarmingDeviceConfig;
-import com.github.iunius118.orefarmingdevice.loot.ModLootTables;
 import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootCondition;
+import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootTables;
 import com.github.iunius118.orefarmingdevice.world.item.ModItems;
 import com.github.iunius118.orefarmingdevice.world.level.block.ModBlocks;
 import com.github.iunius118.orefarmingdevice.world.level.block.OFDeviceBlock;
@@ -47,7 +47,7 @@ public class OFDeviceLootTableTest {
     }
 
     private static void testLootTableLookup(GameTestHelper helper, int index) {
-        ModLootTables lootTable = ModLootTables.values()[index];
+        OFDeviceLootTables lootTable = OFDeviceLootTables.values()[index];
         OFDeviceLootCondition lootCondition = lootTable.getLootCondition();
         helper.assertFalse(lootCondition == OFDeviceLootCondition.NOT_APPLICABLE, "Device loot condition was not found.");
 
@@ -97,12 +97,12 @@ public class OFDeviceLootTableTest {
     public static void registerTestInstance(DeferredRegisterData<GameTestInstance> register) {
         // Register loot table lookup test instances
         IntStream.range(0, TEST_FUNCTIONS.size()).forEach(index ->
-                register.register("loot_table_%s".formatted(ModLootTables.values()[index].name().toLowerCase()), ctx ->
+                register.register("loot_table_%s".formatted(OFDeviceLootTables.values()[index].name().toLowerCase()), ctx ->
                         getLootTableLookupTestInstance(TEST_FUNCTIONS.get(index), ctx.lookup(Registries.TEST_ENVIRONMENT))));
     }
 
     private static FunctionGameTestInstance getLootTableLookupTestInstance(ResourceKey<Consumer<GameTestHelper>> testFunction,
-                                                                           HolderGetter<TestEnvironmentDefinition> testEnvGetter) {
+                                                                           HolderGetter<TestEnvironmentDefinition<?>> testEnvGetter) {
         return new FunctionGameTestInstance(testFunction,
                 new TestData<>(testEnvGetter.getOrThrow(GameTestEnvironments.DEFAULT_KEY),
                         ModGameTest.DEFAULT_STRUCTURE, LOOT_TABLE_LOOKUP_TEST_MAX_TICKS, 0, true));

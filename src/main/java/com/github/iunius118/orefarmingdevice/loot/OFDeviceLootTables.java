@@ -10,6 +10,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -18,7 +19,7 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public enum ModLootTables {
+public enum OFDeviceLootTables {
     DEVICE_0("device_0", Blocks.COBBLESTONE, OFDeviceLootCondition.is(OFDeviceType.MOD_0)),
     DEVICE_0_DEEP("device_0_d", Blocks.COBBLED_DEEPSLATE, OFDeviceLootCondition.is(OFDeviceType.MOD_0)),
     DEVICE_0_NETHER("device_0_n", Blocks.NETHERRACK, OFDeviceLootCondition.is(OFDeviceType.MOD_0)),
@@ -46,21 +47,23 @@ public enum ModLootTables {
 
     private final Identifier id;
     private final ResourceKey<LootTable> resourceKey;
-    private final ItemStack material;
+    private final ItemStackTemplate material;
+    private final boolean isMaterialCobblestoneFeeder;
     private final Predicate<OFDeviceLootCondition> canProcess;
 
-    ModLootTables(String key, ItemLike item, Predicate<OFDeviceLootCondition> canProcess) {
+    OFDeviceLootTables(String key, ItemLike item, Predicate<OFDeviceLootCondition> canProcess) {
         this.id = OreFarmingDevice.makeId(key);
         this.resourceKey = ResourceKey.create(Registries.LOOT_TABLE, id);
-        this.material = new ItemStack(item);
+        this.material = new ItemStackTemplate(item.asItem());
+        this.isMaterialCobblestoneFeeder = item.asItem() instanceof CobblestoneFeederItem;
         this.canProcess = canProcess;
     }
 
-    public static Optional<ModLootTables> find(OFDeviceBlockEntity device, ItemStack stack) {
+    public static Optional<OFDeviceLootTables> find(OFDeviceBlockEntity device, ItemStack stack) {
         return Arrays.stream(values()).filter(t -> t.canProcess(device, stack)).findFirst();
     }
 
-    public static Optional<ModLootTables> find(OFDeviceLootCondition lootCondition, ItemStack stack) {
+    public static Optional<OFDeviceLootTables> find(OFDeviceLootCondition lootCondition, ItemStack stack) {
         return Arrays.stream(values()).filter(t -> t.canProcess(lootCondition, stack)).findFirst();
     }
 
@@ -73,7 +76,7 @@ public enum ModLootTables {
     }
 
     public ItemStack getMaterial() {
-        return material;
+        return material.create();
     }
 
     public OFDeviceLootCondition getLootCondition() {
@@ -83,23 +86,21 @@ public enum ModLootTables {
     }
 
     public boolean canProcess(OFDeviceBlockEntity device, ItemStack stack) {
-        if (material.getItem() instanceof CobblestoneFeederItem
-                && !OreFarmingDeviceConfig.SERVER.isCobblestoneFeederAvailable()) {
+        if (isMaterialCobblestoneFeeder && !OreFarmingDeviceConfig.SERVER.isCobblestoneFeederAvailable()) {
             // OF Cobblestone Feeders is not available for OF Devices by config
             return false;
         }
 
         OFDeviceLootCondition lootCondition = OFDeviceLootCondition.find(device);
-        return canProcess.test(lootCondition) && ItemStack.isSameItem(material, stack);
+        return canProcess.test(lootCondition) && material.is(stack.getItem());
     }
 
     public boolean canProcess(OFDeviceLootCondition lootCondition, ItemStack stack) {
-        if (material.getItem() instanceof CobblestoneFeederItem
-                && !OreFarmingDeviceConfig.SERVER.isCobblestoneFeederAvailable()) {
+        if (isMaterialCobblestoneFeeder && !OreFarmingDeviceConfig.SERVER.isCobblestoneFeederAvailable()) {
             // OF Cobblestone Feeders are not available for OF Devices by config
             return false;
         }
 
-        return canProcess.test(lootCondition) && ItemStack.isSameItem(material, stack);
+        return canProcess.test(lootCondition) && material.is(stack.getItem());
     }
 }

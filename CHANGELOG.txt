@@ -4,6 +4,7 @@
 
 ## [Unreleased]
 ### Changed
+- Port to 26.1.
 - Require Forge 26.1-62.0.9+.
 
 ## [12.1.0 Forge]
