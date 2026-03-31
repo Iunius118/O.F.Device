@@ -25,6 +25,7 @@ public class ModItemRegistry {
     public static final RegistryObject<Item> COBBLESTONE_DEVICE_0 = registerBlockItem(CobblestoneDeviceType.BASIC.getName(), ModBlockRegistry.COBBLESTONE_DEVICE_0);
     public static final RegistryObject<Item> COBBLESTONE_FEEDER = registerCobblestoneFeederItem(CobblestoneFeederType.BASIC.getName(), CobblestoneFeederType.BASIC);
     public static final RegistryObject<Item> COBBLESTONE_FEEDER_2 = registerCobblestoneFeederItem(CobblestoneFeederType.UPGRADED.getName(), CobblestoneFeederType.UPGRADED);
+    public static final RegistryObject<Item> COBBLESTONE_FEEDER_TNT = registerCobblestoneFeederItem(CobblestoneFeederType.TNT.getName(), CobblestoneFeederType.TNT);
 
     private static ResourceKey<Item> modItemId(String name) {
         return ResourceKey.create(Registries.ITEM, OreFarmingDevice.makeId(name));

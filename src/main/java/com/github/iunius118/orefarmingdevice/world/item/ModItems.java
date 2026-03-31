@@ -9,4 +9,5 @@ public class ModItems {
     public static final Item COBBLESTONE_DEVICE_0 = ModItemRegistry.COBBLESTONE_DEVICE_0.get();
     public static final Item COBBLESTONE_FEEDER = ModItemRegistry.COBBLESTONE_FEEDER.get();
     public static final Item COBBLESTONE_FEEDER_2 = ModItemRegistry.COBBLESTONE_FEEDER_2.get();
+    public static final Item COBBLESTONE_FEEDER_TNT = ModItemRegistry.COBBLESTONE_FEEDER_TNT.get();
 }

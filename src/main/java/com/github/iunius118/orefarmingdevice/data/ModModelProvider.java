@@ -104,6 +104,7 @@ public class ModModelProvider extends ModelProvider {
 
             this.generateFlatItem(ModItems.COBBLESTONE_FEEDER, ModelTemplates.FLAT_ITEM);
             this.generateFlatItem(ModItems.COBBLESTONE_FEEDER_2, ModelTemplates.FLAT_ITEM);
+            this.generateFlatItem(ModItems.COBBLESTONE_FEEDER_TNT, ModelTemplates.FLAT_ITEM);
         }
 
         private void addBlockItemModel(BlockItem item, String suffix) {

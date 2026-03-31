@@ -6,6 +6,7 @@ import net.minecraft.resources.Identifier;
 public enum CobblestoneFeederType {
     BASIC("cobblestone_feeder"),
     UPGRADED("cobblestone_feeder_2"),
+    TNT("cobblestone_feeder_tnt"),
     ;
 
     private final String name;

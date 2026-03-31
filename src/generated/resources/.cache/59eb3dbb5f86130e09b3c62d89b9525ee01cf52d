@@ -1,4 +1,4 @@
-// 26.1	2026-03-31T12:51:56.6032927	Loot Tables
+// 26.1	2026-03-31T16:45:02.3766047	Loot Tables
 eb38ba318553c2580346e63476329177c184e95e data/orefarmingdevice/loot_table/blocks/cobblestone_device_0.json
 0ac0253297121f1965cbfb4ac67410fa69f6482e data/orefarmingdevice/loot_table/blocks/device_0.json
 4ee99d3967881f8ec65af17357e67f23bd6f8392 data/orefarmingdevice/loot_table/blocks/device_1.json
@@ -12,3 +12,5 @@ defe5b7c8a44056763a9a35689ec3ba89258285f data/orefarmingdevice/loot_table/device
 37aadfdf11053fcc8f4740df1ae6bbe976a7ac6f data/orefarmingdevice/loot_table/device_2.json
 9a1a751e97661878f40bf64bf1c1f0110cb7ee60 data/orefarmingdevice/loot_table/device_2_d.json
 a390d3f908f1eb7e7b279c68214d36db4342143c data/orefarmingdevice/loot_table/device_2_n.json
+1dbb90687cb7d71c21d8bce9ea4556cb0ea84946 data/orefarmingdevice/loot_table/device_2_tnt.json
+3878f2b97928713a68e3a2f48f6b4fe52b07834d data/orefarmingdevice/loot_table/device_2_tnt_d.json

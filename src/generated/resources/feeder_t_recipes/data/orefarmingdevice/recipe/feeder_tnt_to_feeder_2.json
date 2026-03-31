@@ -3,7 +3,7 @@
   "category": "misc",
   "group": "orefarmingdevice:feeders_to_feeder_2",
   "ingredients": [
-    "orefarmingdevice:cobblestone_device_0"
+    "orefarmingdevice:cobblestone_feeder_tnt"
   ],
   "result": {
     "id": "orefarmingdevice:cobblestone_feeder_2"

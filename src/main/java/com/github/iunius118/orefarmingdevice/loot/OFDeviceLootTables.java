@@ -43,6 +43,8 @@ public enum OFDeviceLootTables {
     DEVICE_2_FEED_DEEP("device_2_d", ModItems.COBBLESTONE_FEEDER, OFDeviceLootCondition.is(OFDeviceLootCondition.MOD_2_IN_DEEP_LAYER)),
     DEVICE_2_FEED_2("device_2", ModItems.COBBLESTONE_FEEDER_2, OFDeviceLootCondition.is(OFDeviceLootCondition.MOD_2_IN_SHALLOW_LAYER)),
     DEVICE_2_FEED_2_DEEP("device_2_d", ModItems.COBBLESTONE_FEEDER_2, OFDeviceLootCondition.is(OFDeviceLootCondition.MOD_2_IN_DEEP_LAYER)),
+    DEVICE_2_FEED_TNT("device_2_tnt", ModItems.COBBLESTONE_FEEDER_TNT, OFDeviceLootCondition.is(OFDeviceLootCondition.MOD_2_IN_SHALLOW_LAYER)),
+    DEVICE_2_FEED_TNT_DEEP("device_2_tnt_d", ModItems.COBBLESTONE_FEEDER_TNT, OFDeviceLootCondition.is(OFDeviceLootCondition.MOD_2_IN_DEEP_LAYER)),
     ;
 
     private final Identifier id;

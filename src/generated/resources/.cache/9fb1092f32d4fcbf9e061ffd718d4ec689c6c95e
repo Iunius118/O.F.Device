@@ -1,4 +1,4 @@
-// 26.1	2026-03-31T12:51:56.6042927	Recipes
+// 26.1	2026-03-31T16:45:02.3816018	Recipes
 d7b2f60bff0d00b8ce871d1ef90861275d8d2293 data/orefarmingdevice/advancement/recipes/decorations/cobblestone_device_0.json
 be08f1df541cb195b0febdfb3814995c1c0b13a2 data/orefarmingdevice/advancement/recipes/decorations/device_0.json
 f27ba0137b2f1a0ee19f30e2cb0ea94afc335e33 data/orefarmingdevice/advancement/recipes/decorations/device_1.json
@@ -16,7 +16,7 @@ e48ad4db06974de8ffd844deecc8c20969a3d592 data/orefarmingdevice/recipe/cobbleston
 088fb7d82662b4704ae4381d3aedcdfe72597ad8 data/orefarmingdevice/recipe/cobblestone_feeder.json
 25afe04e8708fa7ca051f69d10590734bb5f4912 data/orefarmingdevice/recipe/cobblestone_feeder_2.json
 1e23e155c1571b51d413acc8e217b82ce173beac data/orefarmingdevice/recipe/cobblestone_feeder_2_smithing.json
-2237fbd6cf35b5fe8dd26d28235b436ca413a4de data/orefarmingdevice/recipe/c_device_to_feeder_2.json
+a9ebdc712513031c388bf0590db47c04f99f25ce data/orefarmingdevice/recipe/c_device_to_feeder_2.json
 32fcf821a11aaccfcb866668a3f2881b9ad3a7a7 data/orefarmingdevice/recipe/device_0.json
 77a937e1537b7d3291a71e8f4c900f25ff0470c3 data/orefarmingdevice/recipe/device_1.json
 dbf9c79185bb315565eee63fcc767f9b87512604 data/orefarmingdevice/recipe/device_1_smithing.json

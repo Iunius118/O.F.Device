@@ -1,5 +1,6 @@
 package com.github.iunius118.orefarmingdevice.data;
 
+import com.github.iunius118.orefarmingdevice.data.experimental.OFCFeederTRecipeDataProvider;
 import net.minecraft.DetectedVersion;
 import net.minecraft.data.metadata.PackMetadataGenerator;
 import net.minecraft.network.chat.Component;
@@ -19,6 +20,7 @@ public final class ModDataGenerator {
         dataGenerator.addProvider(includesServer, new ModBlockTagsProvider(packOutput, lookupProvider, existingFileHelper));
         dataGenerator.addProvider(includesServer, new ModLootTableProvider(packOutput, lookupProvider));
         dataGenerator.addProvider(includesServer, new ModRecipeProvider.Runner(packOutput, lookupProvider));
+        OFCFeederTRecipeDataProvider.addProviders(event);
         // Disable data pack Experimental_1202 since 1.20.2
         // Experimental1202DataProvider.addProviders(event);
 

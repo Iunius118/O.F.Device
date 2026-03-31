@@ -34,7 +34,8 @@ public class OFDeviceLootTableTest {
         var testFunctionRegister = DeferredRegister.create(Registries.TEST_FUNCTION, OreFarmingDevice.MOD_ID);
         TEST_FUNCTIONS.clear();
 
-        IntStream.rangeClosed(0, 20).forEach(i -> {
+        // Number of tests is specified here directly because of initialization timing with items and blocks
+        IntStream.rangeClosed(0, 22).forEach(i -> {
             String name = "loot_table_%02d".formatted(i);
             TEST_FUNCTIONS.add(testFunctionRegister.register(name, () -> getLootTableLookupTest(i)).getKey());
         });

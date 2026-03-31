@@ -17,6 +17,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.COBBLESTONE_DEVICE_0);
                 output.accept(ModItems.COBBLESTONE_FEEDER);
                 output.accept(ModItems.COBBLESTONE_FEEDER_2);
+                output.accept(ModItems.COBBLESTONE_FEEDER_TNT);
             })
             .build();
 }

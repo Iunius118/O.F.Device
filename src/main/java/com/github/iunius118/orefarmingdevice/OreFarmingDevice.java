@@ -4,10 +4,12 @@ import com.github.iunius118.orefarmingdevice.client.ClientModEventHandler;
 import com.github.iunius118.orefarmingdevice.common.RegisterEventHandler;
 import com.github.iunius118.orefarmingdevice.config.OreFarmingDeviceConfig;
 import com.github.iunius118.orefarmingdevice.data.ModDataGenerator;
+import com.github.iunius118.orefarmingdevice.data.experimental.OFCFeederTRecipeDataProvider;
 import com.github.iunius118.orefarmingdevice.gametest.ModGameTest;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.Identifier;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -31,8 +33,10 @@ public class OreFarmingDevice {
         // Register event handlers
         RegisterEventHandler.registerGameObjects(modBusGroup);
         GatherDataEvent.getBus(modBusGroup).addListener(ModDataGenerator::gatherData);
-        /* Disable data pack Experimental_1202 since 1.20.2
+
         // Register optional data pack handlers
+        AddPackFindersEvent.BUS.addListener(OFCFeederTRecipeDataProvider::addPackFinders);
+        /* Disable data pack Experimental_1202 since 1.20.2
         AddPackFindersEvent.BUS.addListener(Experimental1202DataProvider::addPackFinders);
         //*/
 
