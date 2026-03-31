@@ -3,6 +3,8 @@
 [Source](https://github.com/Iunius118/O.F.Device).
 
 ## [Unreleased]
+### Changed
+- Require Forge 26.1-62.0.9+.
 
 ## [12.1.0 Forge]
 ### Added
