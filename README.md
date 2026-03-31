@@ -153,13 +153,11 @@ OF C Feeder II + Stick -> Diamond Pickaxe
 
 ### OF C Feeder T (ＯＦ丙供給装置丁型)
 
-OF C Feeder T is the improved version of Feeder II with about three times the efficiency.
+OF C Feeder T is the improved version of Feeder II with about three times the efficiency. This item can only be used with OF Device Mod 2.
 
-ＯＦ丙供給装置二型の改良版。効率が約3倍になる。
+ＯＦ丙供給装置二型の改良版。効率が約3倍になる。このアイテムはＯＦ装置改二でのみ使用可能。
 
-This item can only be used with OF Device Mod 2.
-
-ＯＦ装置改二でのみ使用可能。
+#### Recipe
 
 This item's recipe becomes available when the built-in data pack (`orefarmingdevice:feeder_t_recipes`) is enabled.
 
@@ -198,8 +196,6 @@ Built-in optional data pack.
 任意で適用可能な同梱のデータパック。
 
 #### OF C Feeder T recipes
-
-**[Only v13.0.0]**
 
 ID: `orefarmingdevice:feeder_t_recipes`
 

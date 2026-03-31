@@ -128,9 +128,11 @@ OF Device Mod 1:
 
 OF Device Mod 2:
 
-- Cobblestone:       `(data_pack_root)/data/orefarmingdevice/loot_table/device_2.json`
-- Cobbled deepslate: `(data_pack_root)/data/orefarmingdevice/loot_table/device_2_d.json`
-- Netherrack:        `(data_pack_root)/data/orefarmingdevice/loot_table/device_2_n.json`
+- Cobblestone:          `(data_pack_root)/data/orefarmingdevice/loot_table/device_2.json`
+- Cobbled deepslate:    `(data_pack_root)/data/orefarmingdevice/loot_table/device_2_d.json`
+- Netherrack:           `(data_pack_root)/data/orefarmingdevice/loot_table/device_2_n.json`
+- OF C Feeder T (Y>=1): `(data_pack_root)/data/orefarmingdevice/loot_table/device_2_tnt.json`
+- OF C Feeder T (Y<=0): `(data_pack_root)/data/orefarmingdevice/loot_table/device_2_tnt_d.json`
 
 ## Data Pack
 
