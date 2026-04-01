@@ -7,6 +7,9 @@
 - Port to 26.1.1.
 - Require NeoForge 26.1.1.0-beta+.
 
+### Fixed
+- Fix background rendering in OF Device GUI.
+
 ## [13.0.0 NeoForge]
 ### Added
 - Add OF C Feeder T.
