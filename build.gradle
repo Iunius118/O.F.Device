@@ -94,6 +94,10 @@ tasks.named('processResources', ProcessResources).configure {
 tasks.named('jar', Jar).configure {
     // Insert documents into JAR file
     from("LICENSE.txt", "CHANGELOG.txt", "CHEATSHEET.txt", "CREDITS.txt")
+
+    // Exclude common development only resources from finalized outputs
+    exclude("**/*.bbmodel") // BlockBench project files
+    exclude("**/.cache") // datagen cache files
 }
 
 
