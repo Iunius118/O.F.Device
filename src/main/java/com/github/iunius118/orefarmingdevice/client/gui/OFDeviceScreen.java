@@ -27,6 +27,7 @@ public class OFDeviceScreen extends AbstractContainerScreen<OFDeviceMenu> {
 
     @Override
     public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float renderTicks) {
+        super.extractBackground(graphics, mouseX, mouseY, renderTicks);
         int left = this.leftPos;
         int top = this.topPos;
         graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, left, top, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);
