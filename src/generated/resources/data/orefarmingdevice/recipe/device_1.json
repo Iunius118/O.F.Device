@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "ingredients": [
     "orefarmingdevice:device_0",
     "minecraft:iron_pickaxe"

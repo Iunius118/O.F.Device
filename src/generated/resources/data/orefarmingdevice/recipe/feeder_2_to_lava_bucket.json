@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "orefarmingdevice:feeders_to_lava_bucket",
   "ingredients": [
     "orefarmingdevice:cobblestone_feeder_2",
