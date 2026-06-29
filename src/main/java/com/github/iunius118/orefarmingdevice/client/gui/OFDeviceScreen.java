@@ -35,11 +35,11 @@ public class OFDeviceScreen extends AbstractContainerScreen<OFDeviceMenu> {
         if (this.menu.isLit()) {
             // Render remaining burn time bar
             int litProgressHeight = Mth.ceil(this.menu.getLitProgress() * 30.0F);
-            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, LIT_PROGRESS_SPRITE, 8, 30, 0, 30 - litProgressHeight, left + 78, top + 28 + 30 - litProgressHeight, 8, litProgressHeight);
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, LIT_PROGRESS_SPRITE, 8, 32, 0, 30 - litProgressHeight, left + 78, top + 28 + 30 - litProgressHeight, 8, litProgressHeight);
         }
 
         // Render smelting progress bar
         int burnProgressHeigh = Mth.ceil(this.menu.getBurnProgress() * 16.0F);
-        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, BURN_PROGRESS_SPRITE, 14, 16, 0, 0, left + 108, top + 35, 16, burnProgressHeigh);
+        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, BURN_PROGRESS_SPRITE, 16, 16, 0, 0, left + 108, top + 35, 16, burnProgressHeigh);
     }
 }
