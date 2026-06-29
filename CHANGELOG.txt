@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+## [14.0.0 NeoForge]
+### Changed
+- Port to 26.2.
+- Require NeoForge 26.2.0.7-beta+.
+
+### Fixed
+- Fix sprite sizes in OF Device GUI.
+
 ## [13.1.0 NeoForge]
 ### Changed
 - Port to 26.1.1.
