@@ -4,6 +4,14 @@
 
 ## [Unreleased]
 
+## [14.0.0 Forge]
+### Changed
+- Port to 26.2.
+- Require Forge 65.0.1+.
+
+### Fixed
+- Fix sprite sizes in OF Device GUI.
+
 ## [13.1.0 Forge]
 ### Changed
 - Port to 26.1.1.
