@@ -40,22 +40,25 @@ minecraft {
 
     runs {
         configureEach {
-            workingDir = layout.projectDirectory.dir('run')
-
             systemProperty 'eventbus.api.strictRuntimeChecks', 'true'
             systemProperty 'forge.enabledGameTestNamespaces', mod_id
         }
 
-        register('client')
+        register('client') {
+            workingDir = layout.projectDirectory.dir('runs/client')
+        }
 
         register('server') {
+            workingDir = layout.projectDirectory.dir('runs/server')
             args '--nogui'
         }
 
-        register('gameTestServer')
+        register('gameTestServer') {
+            workingDir = layout.projectDirectory.dir('runs/gameTestServer')
+        }
 
         register('data') {
-            workingDir = layout.projectDirectory.dir('run-data')
+            workingDir = layout.projectDirectory.dir('runs/data')
 
             args '--mod', mod_id, '--all', '--output', layout.projectDirectory.dir('src/generated/resources'), '--existing', layout.projectDirectory.dir('src/main/resources')
         }
