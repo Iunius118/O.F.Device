@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "orefarmingdevice:feeders_to_feeder_2",
   "ingredients": [
     "orefarmingdevice:cobblestone_feeder_tnt"
