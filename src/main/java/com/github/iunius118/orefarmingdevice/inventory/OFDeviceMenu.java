@@ -2,6 +2,7 @@ package com.github.iunius118.orefarmingdevice.inventory;
 
 import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootCondition;
 import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootTables;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -106,7 +107,7 @@ public class OFDeviceMenu extends AbstractContainerMenu {
     }
 
     protected boolean isFuel(ItemStack stack) {
-        return this.level.fuelValues().isFuel(stack);
+        return stack.has(DataComponents.COOKING_FUEL);
     }
 
     public float getBurnProgress() {

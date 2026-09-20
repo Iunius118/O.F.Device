@@ -146,7 +146,7 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
 
             if (!device.isLit() && canProcess) {
                 // Burn new fuel stack
-                device.litTimeRemaining = device.getBurnDuration(level.fuelValues(), fuelStack);
+                device.litTimeRemaining = device.getBurnDuration(level, fuelStack);
                 device.litTotalTime = device.litTimeRemaining;
 
                 if (device.isLit()) {

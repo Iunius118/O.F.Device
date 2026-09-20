@@ -9,8 +9,12 @@ import net.minecraft.world.item.ItemStack;
 public class ModCreativeModeTabs {
     public static CreativeModeTab MAIN = CreativeModeTab.builder()
             .title(Component.translatable(ModLanguageProvider.MOD_ITEM_GROUP_KEY))
-            .icon(() -> new ItemStack(ModBlocks.DEVICE_2))
+            .icon(() -> ModItemRegistry.DEVICE_2.isBound() ? new ItemStack(ModBlocks.DEVICE_2) : ItemStack.EMPTY)
             .displayItems((params, output) -> {
+                if (!ModItemRegistry.DEVICE_0.isBound()) {
+                    return;
+                }
+
                 output.accept(ModItems.DEVICE_0);
                 output.accept(ModItems.DEVICE_1);
                 output.accept(ModItems.DEVICE_2);

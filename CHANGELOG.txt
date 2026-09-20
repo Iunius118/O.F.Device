@@ -3,7 +3,11 @@
 [Source](https://github.com/Iunius118/O.F.Device).
 
 ## [Unreleased]
+### Added
+- Block tag `orefarmingdevice:devices`.
+
 ### Changed
+- Port to 26.3.
 - Require NeoForge 26.3.0.7-beta+.
 
 ## [14.0.0 NeoForge]
