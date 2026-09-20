@@ -5,24 +5,20 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": 3.0,
-              "function": "minecraft:set_count"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": 3
+          },
           "name": "minecraft:cobblestone",
           "quality": -240,
           "weight": 839
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": 3.0,
-              "function": "minecraft:set_count"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": 3
+          },
           "name": "minecraft:coal",
           "weight": 50
         },
@@ -33,82 +29,68 @@
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": 2.0,
-              "function": "minecraft:set_count"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": 2
+          },
           "name": "minecraft:lapis_block",
           "weight": 4
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": 3.0,
-              "function": "minecraft:set_count"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": 3
+          },
           "name": "minecraft:raw_iron",
           "weight": 30
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": 3.0,
-              "function": "minecraft:set_count"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": 3
+          },
           "name": "minecraft:raw_gold",
           "weight": 20
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": 2.0,
-              "function": "minecraft:set_count"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": 2
+          },
           "name": "minecraft:redstone_block",
           "weight": 5
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": 3.0,
-              "function": "minecraft:set_count"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": 3
+          },
           "name": "minecraft:diamond"
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": 3.0,
-              "function": "minecraft:set_count"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": 3
+          },
           "name": "minecraft:emerald",
           "weight": 2
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "count": 3.0,
-              "function": "minecraft:set_count"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:set_count",
+            "count": 3
+          },
           "name": "minecraft:amethyst_shard",
           "weight": 2
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "orefarmingdevice:device_2_tnt"

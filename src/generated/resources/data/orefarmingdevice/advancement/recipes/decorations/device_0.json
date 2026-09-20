@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "orefarmingdevice:device_0"
+        "recipes": "orefarmingdevice:device_0"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

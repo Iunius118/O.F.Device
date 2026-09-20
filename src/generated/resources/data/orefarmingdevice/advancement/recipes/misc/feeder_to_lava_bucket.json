@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "orefarmingdevice:feeder_to_lava_bucket"
+        "recipes": "orefarmingdevice:feeder_to_lava_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

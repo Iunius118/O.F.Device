@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "orefarmingdevice:device_1_smithing"
+        "recipes": "orefarmingdevice:device_1_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
