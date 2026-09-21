@@ -11,7 +11,6 @@ import net.minecraft.gametest.framework.FunctionGameTestInstance;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.gametest.framework.TestData;
 import net.minecraft.gametest.framework.TestEnvironmentDefinition;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -62,7 +61,7 @@ public class CobblestoneDeviceTest {
         helper.destroyBlock(devicePos);
         helper.setBlock(devicePos, deviceBlock);
         helper.assertTrue(helper.getBlockState(devicePos).is(deviceBlock),
-                Component.literal("Failed to place device block."));
+                "Failed to place device block.");
         CobblestoneDeviceBlockEntity device = helper.getBlockEntity(devicePos, CobblestoneDeviceBlockEntity.class);
 
         // A hopper below the device
@@ -72,77 +71,73 @@ public class CobblestoneDeviceTest {
         final int expectedProductCountTest1 = 3;
         final int tickTest1 = deviceBlock.type.getIntervalTicks() * expectedProductCountTest1;
         helper.runAfterDelay(tickTest1, () -> {
-                    // Check products in the device
-                    final ItemStack product = device.getItem(0);
-                    helper.assertTrue(product.is(cobblestone),
-                            Component.literal("[Test 1] Product did not match: exp = %s, act = %s."
-                                    .formatted(cobblestone, product.getItem())));
-                    helper.assertTrue(product.getCount() == expectedProductCountTest1,
-                            Component.literal("[Test 1] Product count was incorrect: exp = %d, act = %d"
-                                    .formatted(expectedProductCountTest1, product.getCount())));
+            // Check products in the device
+            final ItemStack product = device.getItem(0);
+            helper.assertTrue(product.is(cobblestone),
+                    "[Test 1] Product did not match: exp = %s, act = %s."
+                            .formatted(cobblestone, product.getItem()));
+            helper.assertTrue(product.getCount() == expectedProductCountTest1,
+                    "[Test 1] Product count was incorrect: exp = %d, act = %d"
+                            .formatted(expectedProductCountTest1, product.getCount()));
 
-                    // Prepare for Test 2
-                    device.setItemForGameTest(0, new ItemStack(cobblestone, cobblestone.getDefaultMaxStackSize() - expectedProductCountTest1));
-                }
-        );
+            // Prepare for Test 2
+            device.setItemForGameTest(0, new ItemStack(cobblestone, cobblestone.getDefaultMaxStackSize() - expectedProductCountTest1));
+        });
 
         // Test 2: Stop generating cobblestone
         final int expectedProductCountTest2 = cobblestone.getDefaultMaxStackSize();
         final int tickTest2 = tickTest1 + deviceBlock.type.getIntervalTicks() * (expectedProductCountTest1 + 1);
         helper.runAfterDelay(tickTest2, () -> {
-                    // Check products in the device
-                    final ItemStack product = device.getItem(0);
-                    helper.assertTrue(product.getCount() == expectedProductCountTest2,
-                            Component.literal("[Test 2] Product count was incorrect: exp = %d, act = %d"
-                                    .formatted(expectedProductCountTest2, product.getCount())));
+            // Check products in the device
+            final ItemStack product = device.getItem(0);
+            helper.assertTrue(product.getCount() == expectedProductCountTest2,
+                    "[Test 2] Product count was incorrect: exp = %d, act = %d"
+                            .formatted(expectedProductCountTest2, product.getCount()));
 
-                    // Prepare for Test 3
-                    device.setItemForGameTest(0, new ItemStack(cobblestone, cobblestone.getDefaultMaxStackSize() - expectedProductCountTest1));
-                    helper.setBlock(hopperPos, Blocks.HOPPER);
-                    helper.assertTrue(helper.getBlockState(hopperPos).is(Blocks.HOPPER),
-                            Component.literal("[Pre Test 3] Failed to place hopper block."));
+            // Prepare for Test 3
+            device.setItemForGameTest(0, new ItemStack(cobblestone, cobblestone.getDefaultMaxStackSize() - expectedProductCountTest1));
+            helper.setBlock(hopperPos, Blocks.HOPPER);
+            helper.assertTrue(helper.getBlockState(hopperPos).is(Blocks.HOPPER),
+                    "[Pre Test 3] Failed to place hopper block.");
 
-                    HopperBlockEntity hopper = helper.getBlockEntity(hopperPos, HopperBlockEntity.class);
-                    hopper.setItem(0, new ItemStack(cobblestone, cobblestone.getDefaultMaxStackSize() - expectedProductCountTest1));
-                    IntStream.range(1, 5).forEach(i -> hopper.setItem(i, new ItemStack(Items.STICK)));
-                }
-        );
+            HopperBlockEntity hopper = helper.getBlockEntity(hopperPos, HopperBlockEntity.class);
+            hopper.setItem(0, new ItemStack(cobblestone, cobblestone.getDefaultMaxStackSize() - expectedProductCountTest1));
+            IntStream.range(1, 5).forEach(i -> hopper.setItem(i, new ItemStack(Items.STICK)));
+        });
 
         // Test 3: Hopper
         final int expectedProductCountTest3 = cobblestone.getDefaultMaxStackSize();
         final int tickTest3 = tickTest2 + deviceBlock.type.getIntervalTicks() * expectedProductCountTest1;
         helper.runAfterDelay(tickTest3, () -> {
-                    // Check products in the hopper
-                    HopperBlockEntity hopper = helper.getBlockEntity(hopperPos, HopperBlockEntity.class);
-                    final ItemStack product = hopper.getItem(0);
-                    helper.assertTrue(product.getCount() == expectedProductCountTest3,
-                            Component.literal("[Test 3] Product count was incorrect: exp = %d, act = %d"
-                                    .formatted(expectedProductCountTest3, product.getCount())));
+            // Check products in the hopper
+            HopperBlockEntity hopper = helper.getBlockEntity(hopperPos, HopperBlockEntity.class);
+            final ItemStack product = hopper.getItem(0);
+            helper.assertTrue(product.getCount() == expectedProductCountTest3,
+                    "[Test 3] Product count was incorrect: exp = %d, act = %d"
+                            .formatted(expectedProductCountTest3, product.getCount()));
 
-                }
-        );
+        });
 
         // Test 4: Stop generating cobblestone with hopper
         final int expectedProductCountTest4 = cobblestone.getDefaultMaxStackSize();
         final int tickTest4 = tickTest3 + deviceBlock.type.getIntervalTicks() * (expectedProductCountTest1 + 1);
         helper.runAfterDelay(tickTest4, () -> {
-                    // Check products in the device
-                    final ItemStack product = device.getItem(0);
-                    helper.assertTrue(product.getCount() == expectedProductCountTest4,
-                            Component.literal("[Test 4] Product count was incorrect: exp = %d, act = %d"
-                                    .formatted(expectedProductCountTest4, product.getCount())));
+            // Check products in the device
+            final ItemStack product = device.getItem(0);
+            helper.assertTrue(product.getCount() == expectedProductCountTest4,
+                    "[Test 4] Product count was incorrect: exp = %d, act = %d"
+                            .formatted(expectedProductCountTest4, product.getCount()));
 
-                    // Clean up if successful
-                    device.setItemForGameTest(0, ItemStack.EMPTY);
-                    helper.destroyBlock(devicePos);
+            // Clean up if successful
+            device.setItemForGameTest(0, ItemStack.EMPTY);
+            helper.destroyBlock(devicePos);
 
-                    HopperBlockEntity hopper = helper.getBlockEntity(hopperPos, HopperBlockEntity.class);
-                    IntStream.range(0, 5).forEach(i -> hopper.setItem(i, ItemStack.EMPTY));
+            HopperBlockEntity hopper = helper.getBlockEntity(hopperPos, HopperBlockEntity.class);
+            IntStream.range(0, 5).forEach(i -> hopper.setItem(i, ItemStack.EMPTY));
 
-                    helper.destroyBlock(hopperPos);
-                    helper.succeed();
-                }
-        );
+            helper.destroyBlock(hopperPos);
+            helper.succeed();
+        });
     }
 
     public static void registerTestInstance(RegisterGameTestsEvent event, Holder<TestEnvironmentDefinition<?>> testEnvironment) {

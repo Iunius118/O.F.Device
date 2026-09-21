@@ -16,7 +16,6 @@ import net.minecraft.gametest.framework.FunctionGameTestInstance;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.gametest.framework.TestData;
 import net.minecraft.gametest.framework.TestEnvironmentDefinition;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -58,7 +57,7 @@ public class OFDeviceLootTableTest {
         OFDeviceLootTables lootTable = OFDeviceLootTables.values()[index];
         OFDeviceLootCondition lootCondition = lootTable.getLootCondition();
         helper.assertFalse(lootCondition == OFDeviceLootCondition.NOT_APPLICABLE,
-                Component.literal("Device loot condition was not found."));
+                "Device loot condition was not found.");
 
         // Get device block pos
         BlockPos absPos = helper.absolutePos(BlockPos.ZERO);
@@ -68,14 +67,14 @@ public class OFDeviceLootTableTest {
         // Place device
         helper.destroyBlock(devicePos);
         OFDeviceType type = lootCondition.getType();
-        OFDeviceBlock deviceBlock = switch(type) {
+        OFDeviceBlock deviceBlock = switch (type) {
             case MOD_0 -> ModBlocks.DEVICE_0;
             case MOD_1 -> ModBlocks.DEVICE_1;
             case MOD_2 -> ModBlocks.DEVICE_2;
         };
         helper.setBlock(devicePos, deviceBlock);
         helper.assertTrue(helper.getBlockState(devicePos).is(deviceBlock),
-                Component.literal("Failed to place device block."));
+                "Failed to place device block.");
         OFDeviceBlockEntity device = helper.getBlockEntity(devicePos, OFDeviceBlockEntity.class);
 
         // Set 8 material items to device
@@ -88,22 +87,24 @@ public class OFDeviceLootTableTest {
                 / OreFarmingDeviceConfig.SERVER.getDeviceProcessingSpeed().getMultiplier());
         final int tick = device.getTotalProcessingTime() * expectedProductCount;
         helper.runAfterDelay(tick, () -> {
-                    // Check products
-                    helper.assertTrue(device.getLastProcessedLootTable() == lootTable,
-                            Component.literal("Loot table did not match: exp = %s, act = %s."
-                                    .formatted(lootTable, device.getLastProcessedLootTable())));
-                    helper.assertTrue(device.getProductCount() == expectedProductCount,
-                            Component.literal("Product count was incorrect: exp = %d, act = %d"
-                                    .formatted(expectedProductCount, device.getProductCount())));
+            // Check products
+            helper.assertTrue(device.getLastProcessedLootTable() == lootTable,
+                    "Loot table did not match: exp = %s, act = %s."
+                            .formatted(lootTable, device.getLastProcessedLootTable()));
+            helper.assertTrue(device.getProductCount() == expectedProductCount,
+                    "Product count was incorrect: exp = %d, act = %d"
+                            .formatted(expectedProductCount, device.getProductCount()));
+            helper.assertTrue(device.getItem(1).isEmpty(),
+                    "Remaining fuel count was incorrect: exp = %d, act = %d"
+                            .formatted(0, device.getItem(1).count()));
 
-                    // Clean up if successful
-                    device.setItem(0, ItemStack.EMPTY);
-                    device.setItem(1, ItemStack.EMPTY);
-                    device.setItem(2, ItemStack.EMPTY);
-                    helper.destroyBlock(devicePos);
-                    helper.succeed();
-                }
-        );
+            // Clean up if successful
+            device.setItem(0, ItemStack.EMPTY);
+            device.setItem(1, ItemStack.EMPTY);
+            device.setItem(2, ItemStack.EMPTY);
+            helper.destroyBlock(devicePos);
+            helper.succeed();
+        });
     }
 
     public static void registerTestInstance(RegisterGameTestsEvent event, Holder<TestEnvironmentDefinition<?>> testEnvironment) {
