@@ -151,7 +151,7 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
 
                 if (device.isLit()) {
                     // Handle fuel
-                    consumeFuel(device.items, fuelStack);
+                    consumeFuel(level, blockPos, device.items, fuelStack);
                     hasChanged = true;
                 }
             }
@@ -205,13 +205,20 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
         return false;
     }
 
-    private static void consumeFuel(NonNullList<ItemStack> items, ItemStack fuel) {
-        if (fuel.count() == 1) {
-            ItemStackTemplate remainder = fuel.getCraftingRemainder();
-            items.set(SLOT_FUEL, remainder != null ? remainder.create() : ItemStack.EMPTY);
+    private static void consumeFuel(ServerLevel level, BlockPos pos, NonNullList<ItemStack> items, ItemStack fuel) {
+        ItemStackTemplate remainder = fuel.getCraftingRemainder();
+        ItemStack newFuel = fuel;
+        fuel.shrink(1);
+
+        if (remainder != null) {
+            if (fuel.isEmpty()) {
+                newFuel = remainder.create();
+            } else {
+                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), remainder.create());
+            }
         }
 
-        fuel.shrink(1);
+        items.set(1, newFuel);
     }
 
     public void updateFarmingEfficiency(Level level, BlockPos blockPos) {
