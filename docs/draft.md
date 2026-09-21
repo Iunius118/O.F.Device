@@ -219,7 +219,7 @@
 
 ## Data Pack
 
-### OF C Feeder T recipes [Only v13.0.0]
+### OF C Feeder T recipes [v13.0.0+]
 
 ID: `orefarmingdevice:feeder_t_recipes`
 
