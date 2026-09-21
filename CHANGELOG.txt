@@ -3,6 +3,8 @@
 [Source](https://github.com/Iunius118/O.F.Device).
 
 ## [Unreleased]
+
+## [15.0.1 NeoForge]
 ### Fixed
 - Fix fuel consumption of devices.
 
@@ -154,7 +156,8 @@
 
 ## [0.8.0]
 ### Added
-- Built-in optional data pack `orefarmingdevice:experimental_1202`. This is an experimental data pack, increasing rate of deepslate diamond ore in device mod 1+ and adding amethyst shard to device mod 2.
+- Built-in optional data pack `orefarmingdevice:experimental_1202`.
+  This is an experimental data pack, increasing rate of deepslate diamond ore in device mod 1+ and adding amethyst shard to device mod 2.
 
 ### Changed
 - Require Forge 1.20.1-47.1.0+.
