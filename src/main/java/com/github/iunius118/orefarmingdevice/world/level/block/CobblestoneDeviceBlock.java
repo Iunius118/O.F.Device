@@ -4,8 +4,6 @@ import com.github.iunius118.orefarmingdevice.state.properties.ModBlockStatePrope
 import com.github.iunius118.orefarmingdevice.state.properties.OFDeviceCasing;
 import com.github.iunius118.orefarmingdevice.world.level.block.entity.CobblestoneDeviceBlockEntity;
 import com.github.iunius118.orefarmingdevice.world.level.block.entity.CobblestoneDeviceType;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
@@ -21,7 +19,6 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -31,12 +28,6 @@ import net.minecraftforge.common.Tags;
 import javax.annotation.Nullable;
 
 public class CobblestoneDeviceBlock extends BaseEntityBlock {
-    public static final MapCodec<CobblestoneDeviceBlock> CODEC = RecordCodecBuilder.mapCodec(
-            (instance) -> instance.group(
-                    BlockBehaviour.Properties.CODEC.fieldOf("properties").forGetter(BlockBehaviour::properties),
-                    Identifier.CODEC.fieldOf("device_type").forGetter(d -> d.type.getId())
-            ).apply(instance, CobblestoneDeviceBlock::new)
-    );
     public static final EnumProperty<OFDeviceCasing> CASING = ModBlockStateProperties.CASING;
 
     public final CobblestoneDeviceType type;
@@ -49,11 +40,6 @@ public class CobblestoneDeviceBlock extends BaseEntityBlock {
 
     public CobblestoneDeviceBlock(Properties properties, Identifier deviceType) {
         this(properties, CobblestoneDeviceType.valueOf(deviceType));
-    }
-
-    @Override
-    public MapCodec<CobblestoneDeviceBlock> codec() {
-        return CODEC;
     }
 
     @Nullable

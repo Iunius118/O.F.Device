@@ -1,10 +1,10 @@
 package com.github.iunius118.orefarmingdevice.gametest;
 
 import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.metadata.PackMetadataGenerator;
-import net.minecraft.data.registries.VanillaRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.PackLocationInfo;
@@ -14,12 +14,11 @@ import net.minecraft.server.packs.PathPackResources;
 import net.minecraft.server.packs.repository.KnownPack;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
-import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
+import net.minecraftforge.common.data.RegistryDataBuilder;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.eventbus.api.bus.BusGroup;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.registries.DeferredRegisterData;
 
 import java.util.Optional;
 
@@ -39,13 +38,13 @@ public class ModGameTestInstanceProvider {
 
         // Add pack metadata
         packGenerator.addProvider(o -> PackMetadataGenerator.forFeaturePack(packOutput, Component.literal("O.F.Device - mod game test instances")));
+
         // Add mod game test instance provider
-        var gameTestInstanceRegister = DeferredRegisterData.create(Registries.TEST_INSTANCE, OreFarmingDevice.MOD_ID);
-        OFDeviceLootTableTest.registerTestInstance(gameTestInstanceRegister);
-        CobblestoneDeviceTest.registerTestInstance(gameTestInstanceRegister);
-        var gameTestInstanceProvider = new DatapackBuiltinEntriesProvider(packOutput, event.getLookupProvider(),
-                VanillaRegistries.builder().add(gameTestInstanceRegister), OreFarmingDevice.MOD_ID);
-        packGenerator.addProvider(o -> gameTestInstanceProvider);
+        var builder = new RegistrySetBuilder()
+                .add(Registries.TEST_INSTANCE, OFDeviceLootTableTest::registerTestInstance)
+                .add(Registries.TEST_INSTANCE, CobblestoneDeviceTest::registerTestInstance);
+        var worldDataProvider = RegistryDataBuilder.of().name(OreFarmingDevice.MOD_ID).world(builder).worldGenerator(packOutput);
+        packGenerator.addProvider(o -> worldDataProvider);
     }
 
     private static void addPackFinders(final AddPackFindersEvent event) {

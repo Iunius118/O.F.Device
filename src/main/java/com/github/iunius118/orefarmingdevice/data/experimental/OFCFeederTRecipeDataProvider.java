@@ -2,14 +2,22 @@ package com.github.iunius118.orefarmingdevice.data.experimental;
 
 import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
 import com.github.iunius118.orefarmingdevice.world.item.ModItems;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.Registry;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.MultiRegistryBootstrap;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.metadata.PackMetadataGenerator;
-import net.minecraft.data.recipes.*;
-import net.minecraft.data.recipes.packs.VanillaRecipeProvider;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.PackLocationInfo;
 import net.minecraft.server.packs.PackSelectionConfig;
 import net.minecraft.server.packs.PackType;
@@ -18,31 +26,37 @@ import net.minecraft.server.packs.repository.KnownPack;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.data.RegistryDataBuilder;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.fml.ModList;
 
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
+import java.util.Set;
 
 public class OFCFeederTRecipeDataProvider {
     private final static String PACK_PATH = "feeder_t_recipes";
     private final static Identifier PACK_ID = OreFarmingDevice.makeId(PACK_PATH);
     private final static String PACK_NAME = "O.F.Device Feeder T Recipes";
 
-    private OFCFeederTRecipeDataProvider() {}
+    private OFCFeederTRecipeDataProvider() {
+    }
 
     public static void addProviders(final GatherDataEvent event) {
         var dataGenerator = event.getGenerator();
         var packOutput = new PackOutput(dataGenerator.getPackOutput().getOutputFolder().resolve(PACK_PATH));
-        var lookupProvider = event.getLookupProvider();
-
         final boolean includesServer = event.includeServer();
         var packGenerator = dataGenerator.getBuiltinDatapack(includesServer, PACK_PATH);
 
-        packGenerator.addProvider((o) -> PackMetadataGenerator.forFeaturePack(packOutput, Component.literal("O.F.Device - OF C Feeder T recipes")));
-        packGenerator.addProvider((o) -> new OFCFeederTRecipeDataProvider.FeederTRecipeProvider.Runner(packOutput, lookupProvider));
+        packGenerator.addProvider(o -> PackMetadataGenerator.forFeaturePack(packOutput, Component.literal("O.F.Device - OF C Feeder T recipes")));
+
+        var builder = new RegistrySetBuilder()
+                // Register reloadable data providers
+                .add(FeederTRecipeProvider.create());
+        var reloadableDataProvider = RegistryDataBuilder.of().modid(OreFarmingDevice.MOD_ID).reloadable(builder).reloadableGenerator(packOutput);
+        packGenerator.addProvider(o -> reloadableDataProvider);
     }
 
     public static void addPackFinders(final AddPackFindersEvent event) {
@@ -61,17 +75,18 @@ public class OFCFeederTRecipeDataProvider {
         }
     }
 
-    private static class FeederTRecipeProvider extends VanillaRecipeProvider {
-        public FeederTRecipeProvider(HolderLookup.Provider provider, RecipeOutput output) {
-            super(provider, output);
+    private static class FeederTRecipeProvider extends RecipeProvider {
+        private final HolderGetter<Item> items;
+
+        public FeederTRecipeProvider(BootstrapContext<Recipe<?>> recipeOutput, BootstrapContext<Advancement> advancementOutput) {
+            super(recipeOutput, advancementOutput);
+            this.items = recipeOutput.lookup(Registries.ITEM);
         }
 
         @Override
         protected void buildRecipes() {
-            final HolderLookup.RegistryLookup<Item> holderGetter = registries.lookupOrThrow(Registries.ITEM);
-
             // Cobblestone Feeder TNT
-            ShapedRecipeBuilder.shaped(holderGetter, RecipeCategory.MISC, ModItems.COBBLESTONE_FEEDER_TNT)
+            ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, ModItems.COBBLESTONE_FEEDER_TNT)
                     .pattern("PTP")
                     .pattern("OHO")
                     .pattern("RfR")
@@ -85,27 +100,25 @@ public class OFCFeederTRecipeDataProvider {
                     .save(output);
 
             // Cobblestone Feeder TNT -> Cobblestone Feeder II
-            ShapelessRecipeBuilder.shapeless(holderGetter, RecipeCategory.MISC, ModItems.COBBLESTONE_FEEDER_2)
+            ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, ModItems.COBBLESTONE_FEEDER_2)
                     .group(OreFarmingDevice.MOD_ID + ":feeders_to_feeder_2")
                     .requires(ModItems.COBBLESTONE_FEEDER_TNT)
                     .unlockedBy("has_feeder_tnt", has(ModItems.COBBLESTONE_FEEDER_TNT))
                     .save(output, OreFarmingDevice.MOD_ID + ":feeder_tnt_to_feeder_2");
         }
 
-        public static class Runner extends RecipeProvider.Runner {
-            protected Runner(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> registries) {
-                super(packOutput, registries);
-            }
+        public static MultiRegistryBootstrap create() {
+            return new MultiRegistryBootstrap() {
+                @Override
+                public Set<ResourceKey<? extends Registry<?>>> requestedRegistries() {
+                    return Set.of(Registries.RECIPE, Registries.ADVANCEMENT);
+                }
 
-            @Override
-            protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
-                return new FeederTRecipeProvider(registries, output);
-            }
-
-            @Override
-            public String getName() {
-                return "Recipes";
-            }
+                @Override
+                public void run(MultiRegistryBootstrap.BootstrapGetter registries) {
+                    new FeederTRecipeProvider(registries.get(Registries.RECIPE), registries.get(Registries.ADVANCEMENT)).buildRecipes();
+                }
+            };
         }
     }
 }

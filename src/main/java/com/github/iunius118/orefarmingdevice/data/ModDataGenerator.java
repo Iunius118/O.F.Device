@@ -1,11 +1,15 @@
 package com.github.iunius118.orefarmingdevice.data;
 
+import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
 import com.github.iunius118.orefarmingdevice.data.experimental.OFCFeederTRecipeDataProvider;
 import net.minecraft.DetectedVersion;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.metadata.PackMetadataGenerator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
+import net.minecraftforge.common.data.RegistryDataBuilder;
 import net.minecraftforge.data.event.GatherDataEvent;
 
 public final class ModDataGenerator {
@@ -17,9 +21,13 @@ public final class ModDataGenerator {
 
         // Server
         boolean includesServer = event.includeServer();
+        var builder = new RegistrySetBuilder()
+                // Register reloadable data providers
+                .add(Registries.LOOT_TABLE, new ModLootTableProvider())
+                .add(ModRecipeProvider.create());
+        var reloadableDataProvider = RegistryDataBuilder.of().modid(OreFarmingDevice.MOD_ID).reloadable(builder).reloadableGenerator(packOutput);
+        dataGenerator.addProvider(includesServer, reloadableDataProvider);
         dataGenerator.addProvider(includesServer, new ModBlockTagsProvider(packOutput, lookupProvider, existingFileHelper));
-        dataGenerator.addProvider(includesServer, new ModLootTableProvider(packOutput, lookupProvider));
-        dataGenerator.addProvider(includesServer, new ModRecipeProvider.Runner(packOutput, lookupProvider));
         OFCFeederTRecipeDataProvider.addProviders(event);
         // Disable data pack Experimental_1202 since 1.20.2
         // Experimental1202DataProvider.addProviders(event);

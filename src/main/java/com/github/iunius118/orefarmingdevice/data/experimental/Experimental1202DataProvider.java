@@ -2,17 +2,14 @@ package com.github.iunius118.orefarmingdevice.data.experimental;
 
 import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
 import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootTables;
-import com.google.common.collect.ImmutableList;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.Registry;
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.loot.LootTableSubProvider;
-import net.minecraft.data.loot.packs.VanillaLootTableProvider;
 import net.minecraft.data.metadata.PackMetadataGenerator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.PackLocationInfo;
 import net.minecraft.server.packs.PackSelectionConfig;
 import net.minecraft.server.packs.PackType;
@@ -20,15 +17,14 @@ import net.minecraft.server.packs.PathPackResources;
 import net.minecraft.server.packs.repository.KnownPack;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
-import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.ValidationContextSource;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
+import net.minecraftforge.common.data.RegistryDataBuilder;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.fml.ModList;
@@ -36,8 +32,6 @@ import net.minecraftforge.fml.ModList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.BiConsumer;
 
 public class Experimental1202DataProvider {
     private final static String PACK_PATH = "experimental_1202";
@@ -49,13 +43,16 @@ public class Experimental1202DataProvider {
     public static void addProviders(final GatherDataEvent event) {
         var dataGenerator = event.getGenerator();
         var packOutput = new PackOutput(dataGenerator.getPackOutput().getOutputFolder().resolve(PACK_PATH));
-        var lookupProvider = event.getLookupProvider();
-
         final boolean includesServer = event.includeServer();
         var packGenerator = dataGenerator.getBuiltinDatapack(includesServer, PACK_PATH);
 
-        packGenerator.addProvider((o) -> PackMetadataGenerator.forFeaturePack(packOutput, Component.literal("O.F.Device - experimental data pack 1.20.2")));
-        packGenerator.addProvider((o) -> new ExperimentalLootTableProvider(packOutput, lookupProvider));
+        packGenerator.addProvider(o -> PackMetadataGenerator.forFeaturePack(packOutput, Component.literal("O.F.Device - experimental data pack 1.20.2")));
+
+        var builder = new RegistrySetBuilder()
+                // Register reloadable data providers
+                .add(Registries.LOOT_TABLE, createLootTableProvider());
+        var reloadableDataProvider = RegistryDataBuilder.of().modid(OreFarmingDevice.MOD_ID).reloadable(builder).reloadableGenerator(packOutput);
+        packGenerator.addProvider(o -> reloadableDataProvider);
     }
 
     public static void addPackFinders(final AddPackFindersEvent event) {
@@ -70,40 +67,22 @@ public class Experimental1202DataProvider {
         var pack = Pack.readMetaAndCreate(packInfo, new PathPackResources.PathResourcesSupplier(resourcePath), PackType.SERVER_DATA, packConfig);
 
         if (pack != null) {
-            event.addRepositorySource((packConsumer) -> packConsumer.accept(pack));
+            event.addRepositorySource((packoutput) -> packoutput.accept(pack));
         }
     }
 
-    private static class ExperimentalLootTableProvider extends LootTableProvider {
-        public ExperimentalLootTableProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookup) {
-            super(packOutput, Set.of(), VanillaLootTableProvider.create(packOutput, lookup).getTables(), lookup);
-        }
-
-        @Override
-        public List<LootTableProvider.SubProviderEntry> getTables() {
-            return ImmutableList.of(
-                    new LootTableProvider.SubProviderEntry(ExperimentalDeviceLootTables::new, LootContextParamSets.EMPTY)
-            );
-        }
-
-        @Override
-        protected void validate(Registry<LootTable> map, ValidationContextSource validationcontext, ProblemReporter report) {
-            // Do not validate against all registered loot tables
-        }
+    private static LootTableProvider createLootTableProvider() {
+        return new LootTableProvider(Set.of(), List.of(
+                new LootTableProvider.SubProviderEntry(ExperimentalDeviceLoot::new, LootContextParamSets.EMPTY)
+        ));
     }
 
-    private static class ExperimentalDeviceLootTables implements LootTableSubProvider {
-        private final HolderLookup.Provider provider;
-
-        public ExperimentalDeviceLootTables(HolderLookup.Provider lookupProvider) {
-            provider = lookupProvider;
-        }
-
+    private record ExperimentalDeviceLoot(LootTableSubProvider.Context output) implements LootTableSubProvider {
         @Override
-        public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer) {
+        public void run() {
             // OF Device Mod 1
-            consumer.accept(OFDeviceLootTables.DEVICE_1_DEEP.getResourceKey(),
-                    LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+            output.accept(OFDeviceLootTables.DEVICE_1_DEEP.getResourceKey(),
+                    LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                             // DEEPSLATE - 3, DEEPSLATE_DIAMOND_ORE + 3
                             .add(LootItem.lootTableItem(Blocks.DEEPSLATE).setWeight(941).setQuality(-240))
                             .add(LootItem.lootTableItem(Blocks.DEEPSLATE_COAL_ORE).setWeight(3))
@@ -117,8 +96,8 @@ public class Experimental1202DataProvider {
             );
 
             // OF Device Mod 2
-            consumer.accept(OFDeviceLootTables.DEVICE_2.getResourceKey(),
-                    LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+            output.accept(OFDeviceLootTables.DEVICE_2.getResourceKey(),
+                    LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                             // STONE - 2, AMETHYST_SHARD + 2
                             .add(LootItem.lootTableItem(Blocks.STONE).setWeight(839).setQuality(-240))
                             .add(LootItem.lootTableItem(Blocks.COAL_ORE).setWeight(50))
@@ -133,8 +112,8 @@ public class Experimental1202DataProvider {
                     )
             );
 
-            consumer.accept(OFDeviceLootTables.DEVICE_2_DEEP.getResourceKey(),
-                    LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+            output.accept(OFDeviceLootTables.DEVICE_2_DEEP.getResourceKey(),
+                    LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                             // DEEPSLATE - 7, DEEPSLATE_DIAMOND_ORE + 3, AMETHYST_SHARD + 4
                             .add(LootItem.lootTableItem(Blocks.DEEPSLATE).setWeight(931).setQuality(-240))
                             .add(LootItem.lootTableItem(Blocks.DEEPSLATE_COAL_ORE).setWeight(3))

@@ -3,6 +3,7 @@ package com.github.iunius118.orefarmingdevice.world.item.crafting;
 import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootCondition;
 import com.github.iunius118.orefarmingdevice.loot.OFDeviceLootTables;
 import com.github.iunius118.orefarmingdevice.world.item.ModItems;
+import com.mojang.datafixers.util.Unit;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -15,8 +16,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-import java.util.Optional;
-
 /**
  * Dummy recipe class for devices.
  * This is used when the device's processing recipe is requested from outside.
@@ -24,12 +23,10 @@ import java.util.Optional;
  */
 public class DeviceProcessingRecipe extends AbstractCookingRecipe {
     public static final MapCodec<DeviceProcessingRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(
-            (instance) -> instance.group(
-                    Codec.STRING.optionalFieldOf("dummy").forGetter(recipe -> Optional.empty())
-            ).apply(instance, (dummy) -> new DeviceProcessingRecipe())
+            (instance) -> instance.group(Codec.EMPTY.forGetter(_ -> Unit.INSTANCE)).apply(instance, _ -> new DeviceProcessingRecipe())
     );
     public static final StreamCodec<RegistryFriendlyByteBuf, DeviceProcessingRecipe> STREAM_CODEC = StreamCodec.of(
-            (b, r) -> {}, (b) -> new DeviceProcessingRecipe()
+            (_, _) -> {}, (_) -> new DeviceProcessingRecipe()
     );
     public static final RecipeSerializer<DeviceProcessingRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
 

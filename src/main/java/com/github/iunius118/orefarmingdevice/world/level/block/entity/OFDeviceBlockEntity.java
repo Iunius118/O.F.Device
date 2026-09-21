@@ -145,12 +145,12 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
 
             if (!device.isLit() && canProcess) {
                 // Burn new fuel stack
-                device.litTimeRemaining = device.getBurnDuration(level.fuelValues(), fuelStack);
+                device.litTimeRemaining = device.getBurnDuration(level, fuelStack);
                 device.litTotalTime = device.litTimeRemaining;
 
                 if (device.isLit()) {
                     // Handle fuel
-                    device.consumeFuel(device.items, fuelStack);
+                    device.consumeFuel(level, blockPos, device.items, fuelStack);
                     hasChanged = true;
                 }
             }
@@ -204,9 +204,10 @@ public class OFDeviceBlockEntity extends AbstractFurnaceBlockEntity {
         return false;
     }
 
-    protected void consumeFuel(NonNullList<ItemStack> items, ItemStack fuel) {
+    @Override
+    protected void consumeFuel(ServerLevel level, BlockPos pos, NonNullList<ItemStack> items, ItemStack fuel) {
         // Forge version uses parent class method patched by Forge
-        super.consumeFuel(items, fuel);
+        super.consumeFuel(level, pos, items, fuel);
     }
 
     public void updateFarmingEfficiency(Level level, BlockPos blockPos) {

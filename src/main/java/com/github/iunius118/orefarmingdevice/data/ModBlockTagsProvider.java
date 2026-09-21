@@ -1,6 +1,7 @@
 package com.github.iunius118.orefarmingdevice.data;
 
 import com.github.iunius118.orefarmingdevice.OreFarmingDevice;
+import com.github.iunius118.orefarmingdevice.tags.ModTags;
 import com.github.iunius118.orefarmingdevice.world.level.block.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -22,8 +23,11 @@ public class ModBlockTagsProvider extends VanillaBlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        addBlocks(tag(BlockTags.MINEABLE_WITH_PICKAXE),
+        addBlocks(tag(ModTags.Blocks.DEVICES),
                 ModBlocks.DEVICE_0, ModBlocks.DEVICE_1, ModBlocks.DEVICE_2, ModBlocks.COBBLESTONE_DEVICE_0);
+
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).addTag(ModTags.Blocks.DEVICES);
+        tag(BlockTags.BLOCKS_MOTION_NO_LEAVES).addTag(ModTags.Blocks.DEVICES);
     }
 
     private TagAppender<Block> addBlocks(TagAppender<Block> appender, Block... blocks) {

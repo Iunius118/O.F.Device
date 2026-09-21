@@ -12,13 +12,13 @@ import com.github.iunius118.orefarmingdevice.world.level.block.entity.OFDeviceTy
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.gametest.framework.*;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.bus.BusGroup;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.DeferredRegisterData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,8 @@ public class OFDeviceLootTableTest {
     private static void testLootTableLookup(GameTestHelper helper, int index) {
         OFDeviceLootTables lootTable = OFDeviceLootTables.values()[index];
         OFDeviceLootCondition lootCondition = lootTable.getLootCondition();
-        helper.assertFalse(lootCondition == OFDeviceLootCondition.NOT_APPLICABLE, "Device loot condition was not found.");
+        helper.assertFalse(lootCondition == OFDeviceLootCondition.NOT_APPLICABLE,
+                "Device loot condition was not found.");
 
         // Get device block pos
         BlockPos absPos = helper.absolutePos(BlockPos.ZERO);
@@ -60,13 +61,14 @@ public class OFDeviceLootTableTest {
         // Place device
         helper.destroyBlock(devicePos);
         OFDeviceType type = lootCondition.getType();
-        OFDeviceBlock deviceBlock = switch(type) {
+        OFDeviceBlock deviceBlock = switch (type) {
             case MOD_0 -> ModBlocks.DEVICE_0;
             case MOD_1 -> ModBlocks.DEVICE_1;
             case MOD_2 -> ModBlocks.DEVICE_2;
         };
         helper.setBlock(devicePos, deviceBlock);
-        helper.assertTrue(helper.getBlockState(devicePos).is(deviceBlock), "Failed to place device block.");
+        helper.assertTrue(helper.getBlockState(devicePos).is(deviceBlock),
+                "Failed to place device block.");
         OFDeviceBlockEntity device = helper.getBlockEntity(devicePos, OFDeviceBlockEntity.class);
 
         // Set 8 material items to device
@@ -79,27 +81,34 @@ public class OFDeviceLootTableTest {
                 / OreFarmingDeviceConfig.SERVER.getDeviceProcessingSpeed().getMultiplier());
         final int tick = device.getTotalProcessingTime() * expectedProductCount;
         helper.runAfterDelay(tick, () -> {
-                    // Check products
-                    helper.assertTrue(device.getLastProcessedLootTable() == lootTable,
-                            "Loot table did not match: exp = %s, act = %s.".formatted(lootTable, device.getLastProcessedLootTable()));
-                    helper.assertTrue(device.getProductCount() == expectedProductCount,
-                            "Product count was incorrect: exp = %d, act = %d".formatted(expectedProductCount, device.getProductCount()));
+            // Check products
+            helper.assertTrue(device.getLastProcessedLootTable() == lootTable,
+                    "Loot table did not match: exp = %s, act = %s."
+                            .formatted(lootTable, device.getLastProcessedLootTable()));
+            helper.assertTrue(device.getProductCount() == expectedProductCount,
+                    "Product count was incorrect: exp = %d, act = %d"
+                            .formatted(expectedProductCount, device.getProductCount()));
+            helper.assertTrue(device.getItem(1).isEmpty(),
+                    "Remaining fuel count was incorrect: exp = %d, act = %d"
+                            .formatted(0, device.getItem(1).count()));
 
-                    // Clean up if successful
-                    device.setItem(0, ItemStack.EMPTY);
-                    device.setItem(1, ItemStack.EMPTY);
-                    device.setItem(2, ItemStack.EMPTY);
-                    helper.destroyBlock(devicePos);
-                    helper.succeed();
-                }
-        );
+            // Clean up if successful
+            device.setItem(0, ItemStack.EMPTY);
+            device.setItem(1, ItemStack.EMPTY);
+            device.setItem(2, ItemStack.EMPTY);
+            helper.destroyBlock(devicePos);
+            helper.succeed();
+        });
     }
 
-    public static void registerTestInstance(DeferredRegisterData<GameTestInstance> register) {
+    public static void registerTestInstance(BootstrapContext<GameTestInstance> context) {
+        var testEnvs = context.lookup(Registries.TEST_ENVIRONMENT);
         // Register loot table lookup test instances
-        IntStream.range(0, TEST_FUNCTIONS.size()).forEach(index ->
-                register.register("loot_table_%s".formatted(OFDeviceLootTables.values()[index].name().toLowerCase()), ctx ->
-                        getLootTableLookupTestInstance(TEST_FUNCTIONS.get(index), ctx.lookup(Registries.TEST_ENVIRONMENT))));
+        IntStream.range(0, TEST_FUNCTIONS.size()).forEach(i -> {
+            String name = "loot_table_%s".formatted(OFDeviceLootTables.values()[i].name().toLowerCase());
+            var testKey = ResourceKey.create(Registries.TEST_INSTANCE, OreFarmingDevice.makeId(name));
+            context.register(testKey, getLootTableLookupTestInstance(TEST_FUNCTIONS.get(i), testEnvs));
+        });
     }
 
     private static FunctionGameTestInstance getLootTableLookupTestInstance(ResourceKey<Consumer<GameTestHelper>> testFunction,
