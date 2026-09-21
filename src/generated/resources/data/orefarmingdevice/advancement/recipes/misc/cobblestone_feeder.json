@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "orefarmingdevice:cobblestone_feeder"
+        "recipes": "orefarmingdevice:cobblestone_feeder"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

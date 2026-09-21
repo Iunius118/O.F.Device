@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "orefarmingdevice:feeder_2_to_diamond_pickaxe"
+        "recipes": "orefarmingdevice:feeder_2_to_diamond_pickaxe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "orefarmingdevice:cobblestone_feeder_2_smithing"
+        "recipes": "orefarmingdevice:cobblestone_feeder_2_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
